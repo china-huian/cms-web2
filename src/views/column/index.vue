@@ -29,9 +29,18 @@ export default {
     Columnlist,
   },
   methods: {
+    ...mapActions('column', ['query']),
     add() {
       this.$router.push('column/add');
     },
+  },
+  mounted(){
+    this.query();
+  },
+  computed: {
+    ...mapState({
+      list: state => state.column.list,
+    }),
   },
 };
 </script>

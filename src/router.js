@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Column from './views/column/index.vue';
 import ColumnAdd from './views/column/add.vue';
-import ContentNews from './views/content/news/index.vue';
 import Pages from './views/pages/index.vue';
 import PagesAdd from './views/pages/add.vue';
 import Menu from './views/menu/index.vue';
@@ -29,11 +28,6 @@ export default new Router({
       path: '/column/add',
       name: 'column-add',
       component: ColumnAdd,
-    },
-    {
-      path: '/content/news',
-      name: 'content-news',
-      component: ContentNews,
     },
     {
       path: '/pages',
