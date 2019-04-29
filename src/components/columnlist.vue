@@ -10,27 +10,17 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="block">
-      <el-pagination
-        :current-page.sync="currentPage"
-        :page-size="100"
-        layout="prev, pager, next, jumper"
-        :total="1000"
-      ></el-pagination>
-    </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+// import { mapActions } from 'vuex';
 export default {
   data() {
-    return {
-      currentPage: 5,
-    };
+    return 
   },
   methods: {
-    ...mapActions(['contents_delete', 'contents_query']),
+    // ...mapActions(['contents_delete', 'contents_query']),
     update(id) {
       //更改跳转
       this.$router.push({ path: '/column/add', query: { id } });
@@ -47,11 +37,5 @@ export default {
 
 <style load="loss" scoped>
 @import '~@/assets/style.less';
-.block {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  background-color: #ffffff;
-  width: 100%;
-}
+
 </style>

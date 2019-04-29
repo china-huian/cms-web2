@@ -6,7 +6,6 @@ import Pages from './views/pages/index.vue';
 import PagesAdd from './views/pages/add.vue';
 import Menu from './views/menu/index.vue';
 import MenuAdd from './views/menu/add.vue';
-
 import Dispose from './views/dispose/index.vue';
 import DisposeAdd from './views/dispose/add.vue';
 

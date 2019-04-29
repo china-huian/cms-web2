@@ -8,11 +8,13 @@
       </el-button>
     </div>
     <Columnlist class="list" :data="columnlist"> </Columnlist>
+    <Pagination></Pagination>
   </div>
 </template>
 
 <script>
 import Columnlist from '@/components/columnlist';
+import Pagination from '@/components/pagination';
 import { mapActions , mapState } from 'vuex';
 export default {
   data() {
@@ -27,6 +29,7 @@ export default {
   },
   components: {
     Columnlist,
+    Pagination,
   },
   methods: {
     ...mapActions('column', ['query']),

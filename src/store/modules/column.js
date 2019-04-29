@@ -1,5 +1,5 @@
 import axios from 'axios';
-import types from '../types.js';
+import * as types from '../types';
 import api from './api';
 
 const state = {
