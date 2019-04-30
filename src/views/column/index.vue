@@ -7,7 +7,7 @@
         添加栏目
       </el-button>
     </div>
-    <Columnlist class="list" :data="columnlist"> </Columnlist>
+    <Columnlist class="list" :list="lista"> </Columnlist>
     <Pagination></Pagination>
   </div>
 </template>
@@ -19,12 +19,12 @@ import { mapActions , mapState } from 'vuex';
 export default {
   data() {
     return {
-      columnlist: [
-        {
-          name: '焦点新闻',
-          date: '2019-04-24',
-        },
-      ],
+      // lista: [
+      //   {
+      //     name: '焦点新闻',
+      //     date: '2019-04-24',
+      //   },
+      // ],
     };
   },
   components: {
@@ -32,17 +32,21 @@ export default {
     Pagination,
   },
   methods: {
-    ...mapActions('column', ['query']),
+    // 固定写法，第一个值为模块名，第二个值为字符串数组，其中为自己定义的异步函数（actions）
+    ...mapActions('page', ['query']),
+  
     add() {
       this.$router.push('column/add');
     },
   },
   mounted(){
-    this.query();
+    // 使用时直接this.函数名调用，括号中对应所传参数，相当于paging花括号中的值
+    this.query({ skip: 1, limit: 20 });
   },
   computed: {
+    // 通过计算函数取到state的值，计算函数中的固定函数，箭头函数中state为固定参数，函数体中取到的是state函数中的page模块中的list
     ...mapState({
-      list: state => state.column.list,
+      lista: state => state.page.list,
     }),
   },
 };

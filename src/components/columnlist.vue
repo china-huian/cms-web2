@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <el-table :data="data" style="width: 100%" height="70vh">
+    <el-table :data="list" style="width: 100%" height="70vh">
       <el-table-column prop="name" label="名称" width="280"></el-table-column>
       <el-table-column prop="date" label="目录" width="280"></el-table-column>
       <el-table-column label="操作">
@@ -17,7 +17,7 @@
 // import { mapActions } from 'vuex';
 export default {
   data() {
-    return 
+    return {}
   },
   methods: {
     // ...mapActions(['contents_delete', 'contents_query']),
@@ -30,7 +30,12 @@ export default {
     },
   },
   props: {
-    data: null,
+    list: null,
+  },
+  watch: {
+    data: function(val) {
+      console.log(val);
+    },
   },
 };
 </script>
