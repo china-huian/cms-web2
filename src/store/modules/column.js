@@ -17,10 +17,35 @@ const actions = {
       return res;
     }
   },
+  async add({ commit }, paging = {}) {
+    const res = await axios.post(api.columnAdd, paging);
+    return res;
+  },
+  async update({ commit }, paging = {}) {
+    const res = await axios.post(api.columnUpdata, paging);
+    return res;
+  },
+  async delete({ commit }, paging = {}) {
+    const res = await axios.post(api.columnDelete, paging);
+    return res;
+  },
+  async fetch({ commit }, paging = {}) {
+    const res = await axios.post(api.columnFetch, paging);
+    if (res.data.errcode == 0) {
+      commit(types.COLUMNFETCH, res.data);
+      return res;
+    } else {
+      return res;
+    }
+  },
 };
 
 const mutations = {
   [types.COLUMNQUERY](state, payload) {
+    state.list = payload.data;
+    state.total = payload.total;
+  },
+  [types.COLUMNFETCH](state,payload) {
     state.list = payload.data;
     state.total = payload.total;
   },
