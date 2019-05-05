@@ -45,7 +45,7 @@ const mutations = {
     state.list = payload.data;
     state.total = payload.total;
   },
-  [types.COLUMNFETCH](state,payload) {
+  [types.COLUMNFETCH](state, payload) {
     state.list = payload.data;
     state.total = payload.total;
   },
