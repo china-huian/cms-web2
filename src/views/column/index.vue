@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     // 固定写法，第一个值为模块名，第二个值为字符串数组，其中为自己定义的异步函数（actions）
-    ...mapActions('page', ['query']),
+    ...mapActions('column', ['query']),
   
     add() {
       this.$router.push('column/add');
@@ -46,7 +46,7 @@ export default {
   computed: {
     // 通过计算函数取到state的值，计算函数中的固定函数，箭头函数中state为固定参数，函数体中取到的是state函数中的page模块中的list
     ...mapState({
-      lista: state => state.page.list,
+      lista: state => state.column.list,
     }),
   },
 };
