@@ -7,20 +7,23 @@
         添加菜单
       </el-button>
     </div>
-    <Menulist class="list" :data="menulist"> </Menulist>
+    <Columnlist class="list" :list="menulist"> </Columnlist>
+    <Pagination></Pagination>
   </div>
 </template>
 
 <script>
-import Menulist from '@/components/menulist';
+import Columnlist from '@/components/columnlist';
+import Pagination from '@/components/pagination';
 export default {
   data() {
     return {
-      menulist: '',
+      // menulist: '',
     };
   },
   components: {
-    Menulist,
+    Columnlist,
+    Pagination,
   },
   methods: {
     add() {
