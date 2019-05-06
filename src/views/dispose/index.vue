@@ -16,7 +16,7 @@ import Columnlist from '@/components/columnlist';
 export default {
   data() {
     return {
-      pageslist: null ,
+      pageslist: null,
     };
   },
   components: {

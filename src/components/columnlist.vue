@@ -14,25 +14,42 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
   data() {
-    return {}
+    return {};
   },
   methods: {
-    // ...mapActions(['contents_delete', 'contents_query']),
+    ...mapActions( 'column', ['delete', 'query']),
+    open(msg) {
+      this.$message({
+        $message: msg,
+      });
+    },
     update(id) {
       //更改跳转
-      this.$router.push({ path: '/column/add', query: { id } });
+      this.$router.push({ path: this.$route.name + '/add', query: { id } });
     },
-    deleted(id) {
-      this.$router.push({ path: '/column/add', query: { id } });
+    async deleted(id) {
+      // 删除
+      try {
+        const res = await this.delete({ id: id });
+        if (res.data.errcode == 0) {
+          this.open('删除成功');
+          this.query({ type: this.type });
+        } else {
+          this.$message.error(res.data.errmsg);
+        }
+      } catch (err) {
+        console.log(err);
+        this.$message.error(err);
+      }
     },
   },
   props: {
     list: null,
   },
-  watch: {
+  watch: { 
     data: function(val) {
       console.log(val);
     },
@@ -42,5 +59,4 @@ export default {
 
 <style load="loss" scoped>
 @import '~@/assets/style.less';
-
 </style>

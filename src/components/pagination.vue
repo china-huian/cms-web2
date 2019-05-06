@@ -1,13 +1,9 @@
 <template>
   <div class="block">
-      <el-pagination
-        :current-page.sync="currentPage"
-        :page-size="100"
-        layout="prev, pager, next, jumper"
-        :total="1000"
-      ></el-pagination>
-    </div>
+    <el-pagination :current-page.sync="currentPage" :page-size="100" layout="prev, pager, next, jumper" :total="1000"></el-pagination>
+  </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -15,7 +11,7 @@ export default {
       currentPage: 5,
     };
   },
-}
+};
 </script>
 <style load="loss" scoped>
 @import '~@/assets/style.less';

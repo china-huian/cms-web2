@@ -7,18 +7,11 @@
       <div class="fd1">
         <el-input class="inputname block" v-model="name" placeholder="请输入名称"></el-input>
         <el-input class="inputname block" v-model="calalog" placeholder="请输入目录"></el-input>
-        <el-button class="fd1 addbtn" type="primary" @click="upadd">
-          <i class="el-icon-circle-check el-icon--left"></i>确认添加
-        </el-button>
+        <el-button class="fd1 addbtn" type="primary" @click="upadd"> <i class="el-icon-circle-check el-icon--left"></i>确认添加 </el-button>
       </div>
       <div class="fd2">
         <el-select v-model="type" placeholder="请选择模板">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
+          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
       </div>
     </div>
