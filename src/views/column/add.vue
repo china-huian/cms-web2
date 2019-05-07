@@ -8,21 +8,12 @@
       <div class="fd1">
         <el-input class="inputname block" v-model="name" placeholder="请输入名称"></el-input>
         <el-input class="inputname block" v-model="calalog" placeholder="请输入目录"></el-input>
-        <el-button v-if="tab" class="fd1 addbtn" type="primary" @click="upadd">
-          <i class="el-icon-circle-check el-icon--left"></i>确认添加
-        </el-button>
-        <el-button v-else class="fd1 addbtn" type="primary" @click="updates">
-          <i class="el-icon-circle-check el-icon--left"></i>确认修改
-        </el-button>
+        <el-button v-if="tab" class="fd1 addbtn" type="primary" @click="upadd"> <i class="el-icon-circle-check el-icon--left"></i>确认添加 </el-button>
+        <el-button v-else class="fd1 addbtn" type="primary" @click="updates"> <i class="el-icon-circle-check el-icon--left"></i>确认修改 </el-button>
       </div>
       <div class="fd2">
         <el-select v-model="type" placeholder="请选择模板">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
+          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
       </div>
     </div>
@@ -36,7 +27,7 @@ export default {
       name: '',
       calalog: '',
       type: '',
-      tab:true,
+      tab: true,
       options: [{ label: '模板1 ', value: '0' }, { label: '模板2', value: '1' }],
     };
   },
@@ -68,13 +59,13 @@ export default {
     },
     async upadd() {
       // 添加
-      if(this.name !== '' ) {
+      if (this.name !== '') {
         try {
           const res = await this.add({
             name: this.name,
             // catalog: this.catalog,
           });
-          if (res.data.errcode == 0){
+          if (res.data.errcode == 0) {
             this.open('添加成功');
             this.$router.push('/column');
           } else {
@@ -90,7 +81,7 @@ export default {
         // 错误弹出
       }
     },
-    async updates () {
+    async updates() {
       // 修改
       if (this.name !== ' ') {
         try {
@@ -111,7 +102,7 @@ export default {
       } else {
         this.$message.error('选项不可以为空');
       }
-    }
+    },
   },
   computed: {
     ...mapState('column', ['list']),

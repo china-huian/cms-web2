@@ -21,8 +21,8 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions( 'column', ['delete', 'query']),
-     open(msg) {
+    ...mapActions('column', ['delete', 'query']),
+    open(msg) {
       this.$message({
         message: msg,
         type: 'success',
@@ -51,7 +51,7 @@ export default {
   props: {
     list: null,
   },
-  watch: { 
+  watch: {
     data: function(val) {
       console.log(val);
     },

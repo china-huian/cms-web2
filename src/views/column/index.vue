@@ -18,8 +18,7 @@ import Pagination from '@/components/pagination';
 import { mapActions, mapState } from 'vuex';
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   components: {
     Columnlist,
