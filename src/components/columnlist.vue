@@ -6,8 +6,8 @@
       <el-table-column prop="time" label="时间" width="250"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="update(scope.row._id)">修改</el-button>
-          <el-button size="mini" type="danger" @click="deleted(scope.row._id)">删除</el-button>
+          <el-button class="fd1" size="mini" type="primary" @click="update(scope.row._id)">修改</el-button>
+          <el-button class="fd1" size="mini" type="danger" @click="deleted(scope.row._id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -22,19 +22,20 @@ export default {
   },
   methods: {
     ...mapActions( 'column', ['delete', 'query']),
-    open(msg) {
+     open(msg) {
       this.$message({
-        $message: msg,
+        message: msg,
+        type: 'success',
       });
     },
-    update(_id) {
+    update(id) {
       //更改跳转
-      this.$router.push({ path: this.$route.name + '/add', query: { _id } });
+      this.$router.push({ path: this.$route.name + '/add', query: { id } });
     },
-    async deleted(_id) {
+    async deleted(id) {
       // 删除
       try {
-        const res = await this.delete({ _id: _id });
+        const res = await this.delete({ id: id });
         if (res.data.errcode == 0) {
           this.open('删除成功');
           this.query({ type: this.type });

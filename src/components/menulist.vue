@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <el-table :data="data" style="width: 100%" height="70vh">
+    <!-- <el-table :data="data" style="width: 100%" height="70vh">
       <el-table-column label="菜单名称" width="250">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
@@ -22,10 +22,8 @@
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
-    </el-table>
-    <div class="block">
-      <el-pagination :current-page.sync="currentPage" :page-size="100" layout="prev, pager, next, jumper" :total="1000"></el-pagination>
-    </div>
+    </el-table> -->
+    <el-tree :data="data" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
   </div>
 </template>
 
@@ -35,11 +33,47 @@ export default {
     return {
       data: [
         {
-          name: '菜单管理',
-          date: '2019-04-25',
+          // name: '菜单管理',
+          // date: '2019-04-25',
+           label: '一级 1',
+          children: [{
+            label: '二级 1-1',
+            children: [{
+              label: '三级 1-1-1'
+            }]
+          }]
+        }, {
+          label: '一级 2',
+          children: [{
+            label: '二级 2-1',
+            children: [{
+              label: '三级 2-1-1'
+            }]
+          }, {
+            label: '二级 2-2',
+            children: [{
+              label: '三级 2-2-1'
+            }]
+          }]
+        }, {
+          label: '一级 3',
+          children: [{
+            label: '二级 3-1',
+            children: [{
+              label: '三级 3-1-1'
+            }]
+          }, {
+            label: '二级 3-2',
+            children: [{
+              label: '三级 3-2-1'
+            }]
+          }]
         },
       ],
-      currentPage: 5,
+      defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
     };
   },
   methods: {

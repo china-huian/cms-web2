@@ -2,7 +2,7 @@ export default {
   // 栏目接口
   columnQuery: 'admin/column/query',
   columnAdd: 'admin/column/add',
-  columnUpdata: 'admin/column/updata',
+  columnUpdate: 'admin/column/updata',
   columnDelete: 'admin/column/delete',
   columnFetch: 'admin/column/fetch',
   // 单页接口

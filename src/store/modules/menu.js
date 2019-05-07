@@ -20,7 +20,7 @@ const actions = {
 };
 
 const mutations = {
-  [types.PAGEQUERY](state, payload){
+  [types.PAGEQUERY](state, payload) {
     state.list = payload.data;
     state.total = payload.total;
   },

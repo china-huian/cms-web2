@@ -22,7 +22,7 @@ const actions = {
     return res;
   },
   async update({ commit }, paging = {}) {
-    const res = await axios.post(api.columnUpdata, paging);
+    const res = await axios.post(api.columnUpdate, paging);
     return res;
   },
   async delete({ commit }, paging = {}) {
@@ -30,6 +30,7 @@ const actions = {
     return res;
   },
   async fetch({ commit }, paging = {}) {
+    // 详细信息
     const res = await axios.post(api.columnFetch, paging);
     if (res.data.errcode == 0) {
       commit(types.COLUMNFETCH, res.data);

@@ -11,7 +11,7 @@
         <el-button v-if="tab" class="fd1 addbtn" type="primary" @click="upadd">
           <i class="el-icon-circle-check el-icon--left"></i>确认添加
         </el-button>
-        <el-button v-else class="fd1 addbtn" type="primary" @click="updatas">
+        <el-button v-else class="fd1 addbtn" type="primary" @click="updates">
           <i class="el-icon-circle-check el-icon--left"></i>确认修改
         </el-button>
       </div>
@@ -45,6 +45,7 @@ export default {
     let id = this.$route.query.id;
     if (id) {
       this.tab = false;
+      console.log(id);
       const resfetch = await this.fetch({ id });
       if (resfetch.data.errcode == 0) {
         this.name = resfetch.data.res[0].name;
@@ -53,12 +54,11 @@ export default {
         // if (resfetch.data.res.grade == '1') {
         //   this.binding = resfetch.data.res[0].binding;
         // }
-        // 绑定顶级目录，可以使用
       }
     }
   },
   methods: {
-    ...mapActions('column', ['query', 'add', 'update', 'fetch ']),
+    ...mapActions('column', ['query', 'add', 'update', 'fetch']),
     open(msg) {
       // 成功弹出
       this.$message({
@@ -68,17 +68,17 @@ export default {
     },
     async upadd() {
       // 添加
-      if(this.name !== '' && this.calalog !== '' ) {
+      if(this.name !== '' ) {
         try {
           const res = await this.add({
             name: this.name,
-            catalog: this.catalog,
+            // catalog: this.catalog,
           });
           if (res.data.errcode == 0){
             this.open('添加成功');
             this.$router.push('/column');
           } else {
-            this.$message.error(res.data.errcode);
+            this.$message.error(res.data.errmsg);
             // 错误弹出内容
           }
         } catch (error) {
@@ -92,17 +92,17 @@ export default {
     },
     async updates () {
       // 修改
-      if (this.name !== ' ' && this.calalog !== '') {
+      if (this.name !== ' ') {
         try {
           const res = await this.update({
             name: this.name,
-            catalog: this.catalog,
+            // catalog: this.catalog,
           });
           if (res.data.errcode == 0) {
             this.open('修改成功');
             this.$router.push('/column');
           } else {
-            this.$message.error(res.data.errcode);
+            this.$message.error(res.data.errmsg);
           }
         } catch (error) {
           console.log(err);
