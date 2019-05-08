@@ -41,10 +41,6 @@ export default {
         this.name = resfetch.data.res[0].name;
         this.catalog = resfetch.data.res[0].catalog;
         this.type = resfetch.data.res[0].type;
-        // if (resfetch.data.res.grade == '1') {
-        //   this.binding = resfetch.data.res[0].binding;
-        // }
-        // 绑定顶级目录，可以使用
       }
     }
   },
@@ -72,7 +68,7 @@ export default {
             this.$message.error(res.data.errcode);
             // 错误弹出内容
           }
-        } catch (error) {
+        } catch (err) {
           console.log(err);
           this.$message.error(err);
         }
@@ -95,7 +91,7 @@ export default {
           } else {
             this.$message.error(res.data.errcode);
           }
-        } catch (error) {
+        } catch (err) {
           console.log(err);
           this.$message.error(err);
         }

@@ -22,6 +22,8 @@ const actions = {
     return res;
   },
   async update({ commit }, paging = {}) {
+    // console.log(paging);
+    // 查看打印时候出现了id和name
     const res = await axios.post(api.columnUpdate, paging);
     return res;
   },
@@ -30,7 +32,6 @@ const actions = {
     return res;
   },
   async fetch({ commit }, paging = {}) {
-    // 详细信息
     const res = await axios.post(api.columnFetch, paging);
     if (res.data.errcode == 0) {
       commit(types.COLUMNFETCH, res.data);

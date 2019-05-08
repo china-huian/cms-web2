@@ -29,22 +29,21 @@ export default {
       type: '',
       tab: true,
       options: [{ label: '模板1 ', value: '0' }, { label: '模板2', value: '1' }],
+      id:'',
     };
   },
   async mounted() {
     // 更改初始化
-    let id = this.$route.query.id;
-    if (id) {
+    this.id = this.$route.query.id;
+    if (this.id) {
       this.tab = false;
-      console.log(id);
-      const resfetch = await this.fetch({ id });
+      const resfetch = await this.fetch({ id: this.id });
+      console.log(resfetch);
       if (resfetch.data.errcode == 0) {
-        this.name = resfetch.data.res[0].name;
-        this.catalog = resfetch.data.res[0].catalog;
-        this.type = resfetch.data.res[0].type;
-        // if (resfetch.data.res.grade == '1') {
-        //   this.binding = resfetch.data.res[0].binding;
-        // }
+        console.log(resfetch.data.data);
+        // this.name = resfetch.data.data.name;
+        // this.name = resfetch.data.data[name];
+        // 记得是两层 console.log(resfetch);查看数据结构
       }
     }
   },
@@ -72,7 +71,7 @@ export default {
             this.$message.error(res.data.errmsg);
             // 错误弹出内容
           }
-        } catch (error) {
+        } catch (err) {
           console.log(err);
           this.$message.error(err);
         }
@@ -83,11 +82,12 @@ export default {
     },
     async updates() {
       // 修改
-      if (this.name !== ' ') {
+      // console.log(this.id);
+      if (this.name !== '' && this.id !== '') {
         try {
           const res = await this.update({
             name: this.name,
-            // catalog: this.catalog,
+            id: this.id,
           });
           if (res.data.errcode == 0) {
             this.open('修改成功');
@@ -95,7 +95,7 @@ export default {
           } else {
             this.$message.error(res.data.errmsg);
           }
-        } catch (error) {
+        } catch (err) {
           console.log(err);
           this.$message.error(err);
         }
