@@ -8,7 +8,7 @@
       </el-button>
     </div>
     <Columnlist class="list" :list="lista"> </Columnlist>
-    <Pagination></Pagination>
+    <Pagination :total="total"></Pagination>
   </div>
 </template>
 
@@ -16,6 +16,7 @@
 import Columnlist from '@/components/columnlist';
 import Pagination from '@/components/pagination';
 import { mapActions, mapState } from 'vuex';
+import { stat } from 'fs';
 export default {
   data() {
     return {};
@@ -40,6 +41,7 @@ export default {
     // 通过计算函数取到state的值，计算函数中的固定函数，箭头函数中state为固定参数，函数体中取到的是state函数中的column模块中的list
     ...mapState({
       lista: state => state.column.list,
+      total: state => state.column.total,
     }),
   },
 };

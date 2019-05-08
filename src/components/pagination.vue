@@ -1,6 +1,13 @@
 <template>
   <div class="block">
-    <el-pagination :current-page.sync="currentPage" :page-size="100" layout="prev, pager, next, jumper" :total="1000"></el-pagination>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="currentPage"
+      :page-size="6"
+      layout="prev, pager, next, jumper"
+      :total="50"
+    ></el-pagination>
   </div>
 </template>
 
@@ -8,8 +15,16 @@
 export default {
   data() {
     return {
-      currentPage: 5,
+      currentPage: 1,
     };
+  },
+  methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
   },
 };
 </script>

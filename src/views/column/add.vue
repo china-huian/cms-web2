@@ -11,25 +11,22 @@
         <el-button v-if="tab" class="fd1 addbtn" type="primary" @click="upadd"> <i class="el-icon-circle-check el-icon--left"></i>确认添加 </el-button>
         <el-button v-else class="fd1 addbtn" type="primary" @click="updates"> <i class="el-icon-circle-check el-icon--left"></i>确认修改 </el-button>
       </div>
-      <div class="fd2">
-        <el-select v-model="type" placeholder="请选择模板">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-        </el-select>
-      </div>
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapState } from 'vuex';
 export default {
+  // props:{
+  //   data: Array
+  // },
   data() {
     return {
       name: '',
       calalog: '',
       type: '',
       tab: true,
-      options: [{ label: '模板1 ', value: '0' }, { label: '模板2', value: '1' }],
-      id:'',
+      id: '',
     };
   },
   async mounted() {
@@ -40,9 +37,8 @@ export default {
       const resfetch = await this.fetch({ id: this.id });
       console.log(resfetch);
       if (resfetch.data.errcode == 0) {
-        console.log(resfetch.data.data);
-        // this.name = resfetch.data.data.name;
-        // this.name = resfetch.data.data[name];
+        console.log(resfetch.data);
+        this.name = resfetch.data.data.name;
         // 记得是两层 console.log(resfetch);查看数据结构
       }
     }
