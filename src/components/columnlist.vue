@@ -29,23 +29,22 @@ export default {
       //更改跳转
       this.$router.push({ path: this.$route.name + '/add', query: { id } });
     },
-    deleted(id) {
-      this.$router.push({ path: this.$route.name + '/add', query: { id } });
-    },
-    // async deleted(id) {
-    //   try {
-    //     const res = await this.delete({ id: id });
-    //     if (res.data.errcode == 0) {
-    //       this.open('删除成功');
-    //       this.query({ type: this.type });
-    //     } else {
-    //       this.$message.error(res.data.errmsg);
-    //     }
-    //   } catch (err) {
-    //     console.log(err);
-    //     this.$message.error(err);
-    //   }
+    // deleted(id) {
+    //   this.$router.push({ path: this.$route.name + '/add', query: { id } });
     // },
+    async deleted(id) {
+      try {
+        const res = await this.delete({ id: id });
+        if (res.data.errcode == 0) {
+          this.open('删除成功');
+        } else {
+          this.$message.error(res.data.errmsg);
+        }
+      } catch (err) {
+        console.log(err);
+        this.$message.error(err);
+      }
+    },
   },
   watch: {
     data: function(val) {

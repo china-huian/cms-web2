@@ -8,7 +8,7 @@ import api from './api';
 const state = {
   list: null,
   total: null,
-  pageadd: null,
+  // pageadd: null,
 };
 
 // actions为定义异步函数，此处处理query接口
@@ -28,7 +28,7 @@ const actions = {
       return res;
     }
   },
-  async pageAdd({ commit }, paging = {}) {
+  async add({ commit }, paging = {}) {
     const res = await axios.post(api.pageAdd, { ...paging });
     return res;
   },
