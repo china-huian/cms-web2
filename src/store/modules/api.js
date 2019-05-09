@@ -6,11 +6,11 @@ export default {
   columnDelete: 'admin/column/delete',
   columnFetch: 'admin/column/fetch',
   // 单页接口
-  pageQuery: 'admin/page/query',
-  pageAdd: 'admin/page/add',
-  pageUpdata: 'admin/page/updata',
-  pageDelete: 'admin/page/delete',
-  pageFetch: 'admin/page/fetch',
+  pageQuery: 'admin/page/query', // 单页内容查询
+  pageAdd: 'admin/page/add', // 单页添加
+  pageUpdata: 'admin/page/updata', //单页修改
+  pageDelete: 'admin/page/delete', //单页删除
+  pageFetch: 'admin/page/fetch', //发布人
   // 菜单接口
   navQuery: 'admin/nav/query',
   navAdd: 'admin/nav/add',

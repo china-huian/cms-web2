@@ -8,6 +8,7 @@ import api from './api';
 const state = {
   list: null,
   total: null,
+  pageadd: null,
 };
 
 // actions为定义异步函数，此处处理query接口
@@ -40,6 +41,9 @@ const mutations = {
     // 此处为获取state中的值，进行了修改
     state.list = payload.data;
     state.total = payload.total;
+  },
+  [types.PAGEADD](state, payload) {
+    state.pageadd = payload;
   },
 };
 

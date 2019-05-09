@@ -15,6 +15,7 @@
 <script>
 import Pagination from '@/components/pagination';
 import Columnlist from '@/components/columnlist';
+import { mapActions, mapState } from 'vuex';
 export default {
   data() {
     return {

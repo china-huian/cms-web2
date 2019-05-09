@@ -19,6 +19,10 @@ export default {
   data() {
     return {};
   },
+  props: {
+    list: null,
+    data: null,
+  },
   methods: {
     ...mapActions('column', ['query']),
     update(id) {
@@ -42,9 +46,6 @@ export default {
     //     this.$message.error(err);
     //   }
     // },
-  },
-  props: {
-    list: null,
   },
   watch: {
     data: function(val) {

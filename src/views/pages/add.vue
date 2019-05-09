@@ -11,22 +11,27 @@
         确认添加
       </el-button>
     </div>
-    <!-- <div class="inputbox">
-      <el-select v-model="value" placeholder="请选择状态">
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-      </el-select>
-    </div> -->
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 export default {
   data() {
     return {
       name: '',
       catalog: '',
-      type: '',
     };
+  },
+  async mounted() {
+    const res = await this.pageQuery({ binding: this.$route.query.catalog, type: '1' });
+    if (res.data.res.length > 0) {
+      this.name = res.data.res[0].name;
+      this.catalog = res.data.res[0].catalog;
+      this.btn = false;
+    } else {
+      this.btn = true;
+    }
   },
   methods: {
     open(msg) {
@@ -35,7 +40,7 @@ export default {
         type: 'success',
       });
     },
-    // ...mapActions('pageAdd'),
+    ...mapActions(['pageQuery', 'pageAdd']),
     async doadd() {
       if (this.name !== '' && this.catalog !== '') {
         const res = await this.pageAdd({
