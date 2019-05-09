@@ -12,7 +12,7 @@ const state = {
 
 // actions为定义异步函数，此处处理query接口
 const actions = {
-  // 异步函数query，第一个参数暂理解为固定写法，commit用于向mutation传送数据，第二个参数为从页面向actions的值
+  // 异步函数query，第一个参数暂理解为固定写法，commit用于向mutation传送数据，第二个参数为从页面向actions传的值
   async query({ commit }, paging = {}) {
     // res为所接收值的返回结果，post方法下第一个参数为路径，第二个参数为传入的值
     const res = await axios.post(api.pageQuery, paging);
@@ -26,6 +26,10 @@ const actions = {
       // 如果失败也需要将结果返回，用于处理错误信息
       return res;
     }
+  },
+  async pageAdd({ commit }, paging = {}) {
+    const res = await axios.post(api.pageAdd, { ...paging });
+    return res;
   },
 };
 

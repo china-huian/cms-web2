@@ -23,8 +23,8 @@ export default [
         link: '/content/news',
       },
       {
-        name: '新闻咨询',
-        link: '/content/asks',
+        name: '新闻资讯',
+        link: '/content/information',
       },
       {
         name: '焦点新闻',

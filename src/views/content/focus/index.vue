@@ -1,49 +1,45 @@
 <template>
   <div class="box">
     <div class="title fj block">
-      <span class="fd1">单页管理</span>
-      <el-button class="fd2 addbtn" type="success" @click="add">
+      <span class="fd1">新闻焦点</span>
+      <el-button class="fd2 addbtn" type="success" @click="add3">
         <i class="el-icon-edit-outline el-icon--left"></i>
-        添加单页
+        焦点添加
       </el-button>
     </div>
-    <Columnlist class="list" :list="pageslist"></Columnlist>
+    <Newslist class="list" :list="newslist3"></Newslist>
     <Pagination />
   </div>
 </template>
 
 <script>
+import Newslist from '@/components/newslist';
 import Pagination from '@/components/pagination';
-import Columnlist from '@/components/columnlist';
 export default {
   data() {
     return {
-      pageslist: [
+      newslist3: [
         {
-          name: '单页添加',
-          date: '2019-04-26',
+          name: '焦点',
+          date: '2020-20-20',
+          count: '122',
+          publisher: '露琪亚',
+          state: '已发布',
         },
       ],
     };
   },
   components: {
-    Columnlist,
+    Newslist,
     Pagination,
   },
   methods: {
-    add() {
-      this.$router.push('pages/add');
+    add3() {
+      this.$router.push('./focus/add');
     },
   },
 };
 </script>
 <style load="loss" scoped>
 @import '~@/assets/style.less';
-.list {
-  width: 100%;
-  margin: 0;
-}
-/* .addbtn {
-  margin-top: 1.6em;
-} */
 </style>

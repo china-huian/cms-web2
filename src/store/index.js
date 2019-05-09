@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 import column from './modules/column';
 // 引入各个模块
 import page from './modules/page';
+
 Vue.use(Vuex);
+Vue.prototype.$ajax = axios;
 
 export default new Vuex.Store({
   modules: {

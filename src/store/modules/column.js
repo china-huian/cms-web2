@@ -9,7 +9,7 @@ const state = {
 
 const actions = {
   async query({ commit }, paging = {}) {
-    const res = await axios.post(api.query, { ...paging });
+    const res = await axios.post(api.columnQuery, { ...paging });
     if (res.data.errcode == 0) {
       commit(types.COLUMNQUERY, res.data);
       return res;
