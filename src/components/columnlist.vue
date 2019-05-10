@@ -52,11 +52,11 @@ export default {
   props: {
     list: null,
   },
-  watch: {
-    datachange: function(val) {
-      console.log(val);
-    },
-  },
+  // watch: {
+  //   datachange: function(val) {
+  //     console.log(val);
+  //   },
+  // },
 };
 </script>
 

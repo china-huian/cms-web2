@@ -24,7 +24,7 @@ export default {
       calalog: '',
       // type: '',
       tab: true,
-      id: '',
+      // id: '',
     };
   },
   async mounted() {
@@ -35,6 +35,8 @@ export default {
       const resfetch = await this.fetch({ id: this.id });
       if (resfetch.data.errcode == 0) {
         console.log(resfetch.data);
+        // let aaa = Array.from(resfetch);
+        // console.log(list);
         this.name = resfetch.data.data.name;
         // 记得是两层 console.log(resfetch);查看数据结构
       }
@@ -99,7 +101,11 @@ export default {
   },
   computed: {
     ...mapState('column', ['list']),
+    // ...mapState('column', {
+    //    lista: state => state.column.list,
+    // }),
   },
+
 };
 </script>
 <style load="loss" scoped>

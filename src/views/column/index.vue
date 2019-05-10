@@ -7,9 +7,8 @@
         添加栏目
       </el-button>
     </div>
-    <Columnlist class="list" :list="lista"> </Columnlist>
-    <Pagination :total="total" @pagination="paging"></Pagination>
-    <!-- <Pagination :total="total" :limit="limit"></Pagination> -->
+    <Columnlist class="list" :list="list"> </Columnlist>
+    <Pagination :total="total" @pagination="paging" :limit="limit"></Pagination>
   </div>
 </template>
 
@@ -21,6 +20,8 @@ import { mapActions, mapState } from 'vuex';
 export default {
   data() {
     return {
+      skip: 1,
+      limit: 10,
     };
   },
   components: {
@@ -42,12 +43,13 @@ export default {
   },
   mounted() {
     // 使用时直接this.函数名调用，括号中对应所传参数，相当于paging花括号中的值
-    this.query({ skip: 1, limit: 10 });
+    // this.query({ skip: 1, limit: 10 });
+    this.query({ skip: 1, limit: this.limit });
   },
   computed: {
     // 通过计算函数取到state的值，计算函数中的固定函数，箭头函数中state为固定参数，函数体中取到的是state函数中的column模块中的list
     ...mapState({
-      lista: state => state.column.list,
+      list: state => state.column.list,
       total: state => state.column.total,
     }),
   },
