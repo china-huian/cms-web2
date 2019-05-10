@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <el-table :data="list" style="width: 100%" height="70vh">
-    <!-- <el-table :data="list.slice((skip-1)*page-size, skip*page-size)" style="width: 100%" height="70vh"> -->
+      <!-- <el-table :data="list.slice((skip-1)*page-size, skip*page-size)" style="width: 100%" height="70vh"> -->
       <el-table-column prop="name" label="名称" width="250"></el-table-column>
       <el-table-column prop="catalog" label="目录" width="250"></el-table-column>
       <el-table-column prop="time" label="时间" width="250"></el-table-column>
@@ -19,7 +19,8 @@
 import { mapActions } from 'vuex';
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   methods: {
     ...mapActions('column', ['delete', 'query']),
@@ -39,7 +40,10 @@ export default {
         const res = await this.delete({ id: id });
         if (res.data.errcode == 0) {
           this.open('删除成功');
-          this.query({ type: this.type });
+          this.$emit('pagination', { skip: this.skip, limit: this.limit });
+          // this.query({ type: this.type });
+          // this.$emit('pagination', { skip: this.skip, limit: this.limit });
+          this.query({ skip: skip, limit: limit });
         } else {
           this.$message.error(res.data.errmsg);
         }
@@ -51,6 +55,9 @@ export default {
   },
   props: {
     list: null,
+    total: null,
+    limit: null,
+    
   },
   // watch: {
   //   datachange: function(val) {

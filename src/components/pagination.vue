@@ -15,7 +15,7 @@ export default {
   name: 'pagination',
   data() {
     return {
-      skip: 1,
+      skip: 2,
     };
   },
   methods: {

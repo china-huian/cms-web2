@@ -7,7 +7,7 @@
         添加栏目
       </el-button>
     </div>
-    <Columnlist class="list" :list="list"> </Columnlist>
+    <Columnlist class="list" :list="list" @pagination="paging" :total="total" :limit="limit" :skip="skip"> </Columnlist>
     <Pagination :total="total" @pagination="paging" :limit="limit"></Pagination>
   </div>
 </template>
