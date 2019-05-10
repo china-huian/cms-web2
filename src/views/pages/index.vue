@@ -7,14 +7,14 @@
         添加单页
       </el-button>
     </div>
-    <Columnlist class="list" :list="pageslist"></Columnlist>
+    <Pageslist class="list" :list="pageslist"></Pageslist>
     <Pagination />
   </div>
 </template>
 
 <script>
 import Pagination from '@/components/pagination';
-import Columnlist from '@/components/columnlist';
+import Pageslist from '@/components/pageslist';
 import { mapActions, mapState } from 'vuex';
 export default {
   data() {
@@ -28,7 +28,7 @@ export default {
     };
   },
   components: {
-    Columnlist,
+    Pageslist,
     Pagination,
   },
   mounted() {
