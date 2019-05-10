@@ -20,6 +20,7 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
+      skip: 1,
     };
   },
   methods: {
@@ -42,7 +43,6 @@ export default {
           this.open('删除成功');
           this.$emit('pagination', { skip: this.skip, limit: this.limit });
           // this.query({ type: this.type });
-          // this.$emit('pagination', { skip: this.skip, limit: this.limit });
           this.query({ skip: skip, limit: limit });
         } else {
           this.$message.error(res.data.errmsg);
@@ -57,7 +57,6 @@ export default {
     list: null,
     total: null,
     limit: null,
-    
   },
   // watch: {
   //   datachange: function(val) {

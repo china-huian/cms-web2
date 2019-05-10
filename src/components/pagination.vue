@@ -15,11 +15,12 @@ export default {
   name: 'pagination',
   data() {
     return {
-      skip: 2,
+      skip: 1,
     };
   },
   methods: {
     handleCurrentChange(val) {
+      var val =val;
       this.skip = val;
       this.$emit('pagination', { skip: this.skip, limit: this.limit });
     },
