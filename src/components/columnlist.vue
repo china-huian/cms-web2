@@ -1,6 +1,7 @@
 <template>
   <div class="list">
     <el-table :data="list" style="width: 100%" height="70vh">
+    <!-- <el-table :data="list.slice((skip-1)*page-size, skip*page-size)" style="width: 100%" height="70vh"> -->
       <el-table-column prop="name" label="名称" width="250"></el-table-column>
       <el-table-column prop="catalog" label="目录" width="250"></el-table-column>
       <el-table-column prop="time" label="时间" width="250"></el-table-column>
@@ -52,7 +53,7 @@ export default {
     list: null,
   },
   watch: {
-    data: function(val) {
+    datachange: function(val) {
       console.log(val);
     },
   },

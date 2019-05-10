@@ -1,30 +1,32 @@
 <template>
   <div class="block">
     <el-pagination
-      @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page.sync="currentPage"
-      :page-size="6"
-      layout="prev, pager, next, jumper"
-      :total="50"
+      current-page.sync="1"
+      :page-size="limit"
+      layout="prev, pager, next, total"
+      :total="total"
     ></el-pagination>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'pagination',
   data() {
     return {
-      currentPage: 1,
+      skip: 1,
     };
   },
   methods: {
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+      this.skip = val;
+      this.$emit('pagination', { skip: this.skip, limit: this.limit });
     },
+  },
+  props: {
+    total: null,
+    limit: null,
   },
 };
 </script>

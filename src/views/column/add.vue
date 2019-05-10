@@ -17,14 +17,12 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 export default {
-  // props:{
-  //   data: Array
-  // },
   data() {
     return {
       name: '',
+      // name: [],
       calalog: '',
-      type: '',
+      // type: '',
       tab: true,
       id: '',
     };
@@ -35,7 +33,6 @@ export default {
     if (this.id) {
       this.tab = false;
       const resfetch = await this.fetch({ id: this.id });
-      console.log(resfetch);
       if (resfetch.data.errcode == 0) {
         console.log(resfetch.data);
         this.name = resfetch.data.data.name;
