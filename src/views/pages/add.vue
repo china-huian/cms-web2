@@ -64,6 +64,7 @@ export default {
     },
     ...mapActions(['query', 'add']),
     async doadd() {
+      this.tab = false;
       if (this.name !== '') {
         const res = await this.add({
           name: this.name,

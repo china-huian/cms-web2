@@ -34,6 +34,7 @@ export default {
     ...mapActions('column', ['query']),
     update(id) {
       //更改跳转
+      this.tab = false;
       this.$router.push({ path: this.$route.name + '/add', query: { id } });
     },
     // deleted(id) {
