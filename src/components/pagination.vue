@@ -20,7 +20,6 @@ export default {
   },
   methods: {
     handleCurrentChange(val) {
-      var val =val;
       this.skip = val;
       this.$emit('pagination', { skip: this.skip, limit: this.limit });
     },

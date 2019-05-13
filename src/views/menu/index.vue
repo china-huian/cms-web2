@@ -7,10 +7,8 @@
         添加菜单
       </el-button>
     </div>
-
-    <!-- <Columnlist class="list" :list="menulist"> </Columnlist> -->
     <Menulist class="list" :list="menulist"></Menulist>
-    <!-- <Pagination></Pagination> -->
+    
   </div>
 </template>
 
