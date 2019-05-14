@@ -7,8 +7,8 @@
         添加栏目
       </el-button>
     </div>
-    <Columnlist class="list" :list="list" @pagination="paging" :total="total" :limit="limit" > </Columnlist>
-    <Pagination :total="total" @pagination="paging" :limit="limit"></Pagination>
+    <Columnlist class="list" :list="list" :limit="limit"> </Columnlist>
+    <Pagination :total="total" v-on:pagination="paging" :limit="limit"></Pagination>
   </div>
 </template>
 
@@ -16,12 +16,11 @@
 import Columnlist from '@/components/columnlist';
 import Pagination from '@/components/pagination';
 import { mapActions, mapState } from 'vuex';
-// import { stat } from 'fs';
 export default {
   data() {
     return {
       skip: 1,
-      limit: 10,
+      limit: 2,
     };
   },
   components: {

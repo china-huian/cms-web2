@@ -20,23 +20,18 @@ export default {
   data() {
     return {
       name: '',
-      // name: [],
       calalog: '',
-      // type: '',
       tab: true,
-      // id: '',
     };
   },
   async mounted() {
     // 更改初始化
     this.id = this.$route.query.id;
+    // let id = this.$route.query.id;
     if (this.id) {
       this.tab = false;
       const resfetch = await this.fetch({ id: this.id });
       if (resfetch.data.errcode == 0) {
-        console.log(resfetch.data);
-        // let aaa = Array.from(resfetch);
-        // console.log(list);
         this.name = resfetch.data.data.name;
         // 记得是两层 console.log(resfetch);查看数据结构
       }
@@ -57,7 +52,7 @@ export default {
         try {
           const res = await this.add({
             name: this.name,
-            // catalog: this.catalog,
+            catalog: this.catalog,
           });
           if (res.data.errcode == 0) {
             this.open('添加成功');
@@ -105,7 +100,6 @@ export default {
     //    lista: state => state.column.list,
     // }),
   },
-
 };
 </script>
 <style load="loss" scoped>

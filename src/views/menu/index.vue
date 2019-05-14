@@ -2,27 +2,21 @@
   <div class="box">
     <div class="title fj block">
       <span class="fd1">菜单管理</span>
-      <el-button class="fd2 addbtn" type="success" @click="add">
-        <i class="el-icon-edit-outline  el-icon--left"></i>
-        添加菜单
-      </el-button>
+      
     </div>
     <Menulist class="list" :list="menulist"></Menulist>
-    
   </div>
 </template>
 
 <script>
-// import Pagination from '@/components/pagination';
 import Menulist from '@/components/menulist';
 export default {
   data() {
     return {
-      // menulist: '',
+      menulist: '',
     };
   },
   components: {
-    // Pagination,
     Menulist,
   },
   methods: {

@@ -2,7 +2,7 @@
   <div class="block">
     <el-pagination
       @current-change="handleCurrentChange"
-      current-page.sync="1"
+      :current-page.sync="skip"
       :page-size="limit"
       layout="prev, pager, next, total"
       :total="total"

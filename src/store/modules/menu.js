@@ -11,7 +11,7 @@ const actions = {
   async query({ commit }, paging = {}) {
     const res = await axios.post(api.navQuery, paging);
     if (res.data.error == 0) {
-      commit(types.PAGEQUERY, res.data);
+      commit(types.MENUQUERY, res.data);
       return res;
     } else {
       return res;
@@ -20,7 +20,7 @@ const actions = {
 };
 
 const mutations = {
-  [types.PAGEQUERY](state, payload) {
+  [types.MENUQUERY](state, payload) {
     state.list = payload.data;
     state.total = payload.total;
   },
