@@ -12,7 +12,7 @@
           <i class="el-icon-circle-check el-icon--left"></i>
           确认添加
         </el-button>
-        <el-button v-else class="input" type="primary" @click="doadd">
+        <el-button v-else class="input" type="primary" @click="doupdate">
           <i class="el-icon-circle-check el-icon--left"></i>
           确认修改
         </el-button>
@@ -41,6 +41,7 @@ export default {
     // const res = await this.pageQuery({ });
     this.id = this.$route.query.id;
     if (this.id) {
+      this.tab = false;
       const resfetch = await this.query({ id: this.id });
       if (resfetch.data.errcode == 0) {
         this.name = resfetch.data.data.name;
@@ -62,11 +63,21 @@ export default {
         type: 'success',
       });
     },
-    ...mapActions(['query', 'add']),
+    ...mapActions(['query', 'pageAdd', 'pageUpdate']),
+    async doupdate() {
+      const res = await this.pageUpdate({
+        name: this.name,
+      });
+      if (res.date.errcode == 0) {
+        this.open('修改成功');
+        this.$router.push({ path: '/pages' });
+      } else {
+        this.$message.error(res.date.errmsg);
+      }
+    },
     async doadd() {
-      this.tab = false;
       if (this.name !== '') {
-        const res = await this.add({
+        const res = await this.pageAdd({
           name: this.name,
         });
         if (res.data.errcode == 0) {
