@@ -2,7 +2,6 @@
   <div class="box">
     <div class="title fj block">
       <span class="fd1">菜单管理</span>
-      
     </div>
     <Menulist class="list" :list="menulist"></Menulist>
   </div>

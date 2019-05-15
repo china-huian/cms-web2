@@ -21,17 +21,22 @@
 
 <script>
 import nav from '@/store/nav-list.js';
+// import { mapActions } from 'vuex';
 export default {
   name: 'nav-list',
   data() {
     return {
       nav: null,
+      // arr: null,
     };
   },
   mounted() {
     this.nav = nav;
+    // const arr = this.query();
+    // console.log(arr);
   },
   methods: {
+    // ...mapActions('column', ['query']),
     btn(item) {
       this.$router.push(item.link);
     },

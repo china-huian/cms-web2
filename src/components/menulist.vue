@@ -23,30 +23,18 @@
         </template>
       </el-table-column>
     </el-table>-->
-    <el-tree
-      class="tree"
-      :data="data"
-      :props="defaultProps"
-      accordion
-      @node-click="handleNodeClick"
-    ></el-tree>
+    <el-tree class="tree" :data="data" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
     <el-button class="fd1 addbtn" type="success" @click="add">
-        <i class="el-icon-edit-outline  el-icon--left"></i>
-        新建菜单
+      <i class="el-icon-edit-outline  el-icon--left"></i>
+      新建菜单
     </el-button>
     <el-button class="fd1 addbtn" type="danger" @click="add">
-        <i class="el-icon-delete  el-icon--left"></i>
-        删除
+      <i class="el-icon-delete  el-icon--left"></i>
+      删除
     </el-button>
 
     <div class="content">
-      <el-form
-        :model="ruleForm"
-        :rules="rules"
-        ref="ruleForm"
-        label-width="100px"
-        class="demo-ruleForm"
-      >
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="名称" prop="name">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>

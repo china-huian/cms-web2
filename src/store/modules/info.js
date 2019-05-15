@@ -9,52 +9,46 @@ const state = {
 
 const actions = {
   async query({ commit }, paging = {}) {
-    const res = await axios.post(api.columnQuery, paging);
+    const res = await axios.post(api.infoQuery, paging);
     if (res.data.errcode == 0) {
-      commit(types.COLUMNQUERY, { data: res.data.data, total: res.data.total });
+      commit(types.INFOQUERY, res.data);
       return res;
     } else {
       return res;
     }
   },
   async add({ commit }, paging = {}) {
-    // console.log(paging);
-    const res = await axios.post(api.columnAdd, paging);
-    return res;
-  },
-  async update({ commit }, paging = {}) {
-    // console.log(paging);
-    // 查看打印时候出现了id和name
-    const res = await axios.post(api.columnUpdate, paging);
+    const res = await axios.post(api.infoAdd, paging);
     return res;
   },
   async delete({ commit }, paging = {}) {
-    const res = await axios.post(api.columnDelete, paging);
+    const res = await axios.post(api.infoDelete, paging);
+    return res;
+  },
+  async update({ commit }, paging = {}) {
+    const res = await axios.post(api.infoUpdata, paging);
     return res;
   },
   async fetch({ commit }, paging = {}) {
-    const res = await axios.post(api.columnFetch, paging);
-    // console.log(paging);
+    const res = await axios.post(api.infoFetch, paging);
     if (res.data.errcode == 0) {
-      commit(types.COLUMNFETCH, res.data);
+      commit(types.INFOFETCH, res.data);
       return res;
     } else {
       return res;
     }
   },
 };
-
 const mutations = {
-  [types.COLUMNQUERY](state, payload) {
+  [types.INFOQUERY](state, payload) {
     state.list = payload.data;
     state.total = payload.total;
   },
-  [types.COLUMNFETCH](state, payload) {
+  [types.INFOFETCH](state, payload) {
     state.list = payload.data;
     state.total = payload.total;
   },
 };
-
 export default {
   namespaced: true,
   state,

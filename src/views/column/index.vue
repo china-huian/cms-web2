@@ -7,7 +7,7 @@
         添加栏目
       </el-button>
     </div>
-    <Columnlist class="list" :list="list" :limit="limit"> </Columnlist>
+    <Columnlist class="list" :list="Array(...list)" :limit="limit"> </Columnlist>
     <Pagination :total="total" v-on:pagination="paging" :limit="limit"></Pagination>
   </div>
 </template>

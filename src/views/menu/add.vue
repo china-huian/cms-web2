@@ -27,8 +27,6 @@ export default {
       name: '',
       calalog: '',
       type: '',
-      tab: true,
-      options: [{ label: '模板1 ', value: '0' }, { label: '模板2', value: '1' }],
     };
   },
   async mounted() {
@@ -38,9 +36,8 @@ export default {
       this.tab = false;
       const resfetch = await this.fetch({ id });
       if (resfetch.data.errcode == 0) {
-        this.name = resfetch.data.res[0].name;
-        this.catalog = resfetch.data.res[0].catalog;
-        this.type = resfetch.data.res[0].type;
+        // this.name = resfetch.data.res[0].name;
+        // this.catalog = resfetch.data.res[0].catalog;
       }
     }
   },

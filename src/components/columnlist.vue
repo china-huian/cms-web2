@@ -36,7 +36,7 @@ export default {
       this.$router.push({ path: this.$route.name + '/add', query: { id } });
     },
     async remove(id) {
-      console.log(id);
+      // console.log(id);
       // 删除
       try {
         const res = await this.delete({ id: id });
@@ -47,7 +47,7 @@ export default {
           this.$message.error(res.data.errmsg);
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         this.$message.error(err);
       }
     },
@@ -55,11 +55,6 @@ export default {
   props: {
     list: null,
     limit: null,
-  },
-  watch: {
-    list: function(val) {
-      console.log(this.list);
-    },
   },
 };
 </script>
