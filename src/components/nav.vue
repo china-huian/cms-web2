@@ -52,8 +52,8 @@ export default {
       this.$router.push(item.link);
       this.query();
     },
-    link(item) {
-      this.$router.push({ name:item });
+    link(address) {
+      this.$router.push({ name:address });
       // console.log(item.link);
     },
   },
