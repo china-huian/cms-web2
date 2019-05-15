@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       name: '',
-      catalog: null,
+      // catalog: null,
       value: null,
       id: null,
     };
@@ -55,7 +55,6 @@ export default {
       });
     },
     async doupdate() {
-      console.log(this.id);
       const res = await this.update({
         name: this.name,
         content: this.value,
