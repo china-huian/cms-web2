@@ -4,6 +4,7 @@ import column from './modules/column';
 import menu from './modules/menu';
 // 引入各个模块
 import page from './modules/page';
+import nav from './modules/nav';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,5 +13,6 @@ export default new Vuex.Store({
     menu,
     // 将各模块挂载
     page,
+    nav,
   },
 });

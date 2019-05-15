@@ -11,7 +11,9 @@ const actions = {
   async query({ commit }, paging = {}) {
     const res = await axios.post(api.columnQuery, paging);
     if (res.data.errcode == 0) {
-      commit(types.COLUMNQUERY, { data: res.data.data, total: res.data.total });
+      // commit(types.COLUMNQUERY, { data: res.data.data, total: res.data.total });
+      commit(types.COLUMNFETCH, res.data);
+      // console.log(res.data.data);
       return res;
     } else {
       return res;
