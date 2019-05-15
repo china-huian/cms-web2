@@ -4,7 +4,7 @@
       <span class="fd1">新闻焦点</span>
       <el-button class="fd2 addbtn" type="success" @click="add3">
         <i class="el-icon-edit-outline el-icon--left"></i>
-        焦点添加
+        添加焦点
       </el-button>
     </div>
     <Newslist class="list" :list="newslist3"></Newslist>
@@ -23,7 +23,7 @@ export default {
           name: '焦点',
           date: '2020-20-20',
           count: '122',
-          publisher: '露琪亚',
+          publisher: 'ass',
           state: '已发布',
         },
       ],

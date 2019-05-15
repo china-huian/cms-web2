@@ -48,7 +48,7 @@ export default {
     // 自定义菜单配置
     editor.customConfig.menus = menus;
     editor.customConfig.zIndex = 0;
-    editor.customConfig.uploadImgServer = '/admin/imgup';
+    editor.customConfig.uploadImgServer = '/admin/file/upload';
     editor.customConfig.uploadImgMaxLength = 1;
     editor.customConfig.uploadImgHooks = {
       // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
@@ -57,7 +57,8 @@ export default {
         // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
         // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
         // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
-        var url = result.uri;
+        console.log(result);
+        var url = result.data.url;
         insertImg(url);
         // result 必须是一个 JSON 格式字符串！！！否则报错
       },
@@ -68,6 +69,11 @@ export default {
   methods: {
     getContent: function() {
       return this.editorContent;
+    },
+  },
+  watch: {
+    value: function(val) {
+      console.log(val);
     },
   },
 };

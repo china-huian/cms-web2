@@ -1,14 +1,14 @@
 <template>
   <div class="box addbox block">
     <div class="title fj">
-      <span class="fd1" v-if="tab">单页添加</span>
+      <span class="fd1" v-if="!id">单页添加</span>
       <span class="fd1" v-else>单页修改</span>
     </div>
     <div class="inputbox">
       <el-input class="input" v-model="name" placeholder="请输入名称"></el-input>
-      <Wangeditor class="editor" v-if="id !== null || contents !== null" v-model="contents"></Wangeditor>
+      <Wangeditor class="editor" v-if="id == null || value !== null" v-model="value"></Wangeditor>
       <div class="btn">
-        <el-button v-if="tab" class="input" type="primary" @click="doadd">
+        <el-button v-if="id == null" class="input" type="primary" @click="doadd">
           <i class="el-icon-circle-check el-icon--left"></i>
           确认添加
         </el-button>
@@ -29,8 +29,7 @@ export default {
     return {
       name: '',
       catalog: null,
-      contents: null,
-      tab: true,
+      value: null,
       id: null,
     };
   },
@@ -38,35 +37,28 @@ export default {
     Wangeditor,
   },
   async mounted() {
-    // const res = await this.pageQuery({ });
     this.id = this.$route.query.id;
     if (this.id) {
-      this.tab = false;
-      const resfetch = await this.query({ id: this.id });
-      if (resfetch.data.errcode == 0) {
-        this.name = resfetch.data.data.name;
-        this.contents = resfetch.data.data.contents;
+      const res = await this.fetch({ id: this.id });
+      if (res.data.errcode == 0) {
+        this.name = res.data.data.name;
+        this.value = res.data.data.content;
       }
-      // if (res.data.res.length > 0) {
-      //   this.name = res.data.res[0].name;
-      //   this.catalog = res.data.res[0].catalog;
-      //   this.btn = false;
-      // } else {
-      //   this.btn = true;
-      // }
     }
   },
   methods: {
+    ...mapActions('page', ['fetch', 'add', 'update']),
     open(msg) {
       this.$message({
         message: msg,
         type: 'success',
       });
     },
-    ...mapActions(['query', 'pageAdd', 'pageUpdate']),
     async doupdate() {
-      const res = await this.pageUpdate({
+      const res = await this.update({
         name: this.name,
+        content: this.value,
+        id: this.id,
       });
       if (res.date.errcode == 0) {
         this.open('修改成功');
@@ -75,10 +67,12 @@ export default {
         this.$message.error(res.date.errmsg);
       }
     },
+
     async doadd() {
       if (this.name !== '') {
-        const res = await this.pageAdd({
+        const res = await this.add({
           name: this.name,
+          content: this.value,
         });
         if (res.data.errcode == 0) {
           this.open('添加成功');
@@ -93,6 +87,29 @@ export default {
         this.$message.error('请填写完整信息');
       }
     },
+    // async doadd(){
+    //   if(this.name !==''){
+    //     try {
+    //       const res = await this.add({
+    //         name:this.name,
+    //         content:this.value,
+    //       });
+    //       if (res.data.errcode == 0) {
+    //       this.open('添加成功');
+    //       this.$router.push({
+    //         path: '/pages',
+    //       })
+    //       } else {
+    //         this.$message.error(res.data.errmsg);
+    //       }
+    //     }
+    //     catch (error) {
+    //       console.log(error);
+    //     }
+    //   }else{
+    //     this.$message.error('请填写完整信息');
+    //   }
+    // }
   },
 };
 </script>

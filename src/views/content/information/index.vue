@@ -23,7 +23,7 @@ export default {
           name: '新闻资讯',
           date: '2020-20-20',
           count: '122',
-          publisher: '一护',
+          publisher: 'asd',
           state: '已发布',
         },
       ],

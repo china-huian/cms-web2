@@ -7,7 +7,7 @@
         添加单页
       </el-button>
     </div>
-    <Pageslist class="list" :list="pageslist"></Pageslist>
+    <Pageslist class="list" :list="pageslist" v-on:success="success"></Pageslist>
     <Pagination />
   </div>
 </template>
@@ -18,14 +18,7 @@ import Pageslist from '@/components/pageslist';
 import { mapActions, mapState } from 'vuex';
 export default {
   data() {
-    return {
-      // pageslist: [
-      //   {
-      //     name: '单页添加',
-      //     date: '2019-04-26',
-      //   },
-      // ],
-    };
+    return {};
   },
   components: {
     Pageslist,
@@ -51,6 +44,9 @@ export default {
     },
     add() {
       this.$router.push('pages/add');
+    },
+    success() {
+      this.query({ skip: 1, limit: 20 });
     },
   },
 };

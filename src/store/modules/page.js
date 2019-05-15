@@ -8,7 +8,6 @@ import api from './api';
 const state = {
   list: null,
   total: null,
-  // pageadd: null,
 };
 
 // actions为定义异步函数，此处处理query接口
@@ -32,6 +31,18 @@ const actions = {
     const res = await axios.post(api.pageAdd, { ...paging });
     return res;
   },
+  async fetch({ commit }, paging = {}) {
+    const res = await axios.post(api.pageFetch, { ...paging });
+    return res;
+  },
+  async delete({ commit }, paging = {}) {
+    const res = await axios.post(api.pageDelete, { ...paging });
+    return res;
+  },
+  async update({ commit }, paging = {}) {
+    const res = await axios.post(api.pageUpdata, { ...paging });
+    return res;
+  },
 };
 
 // 同步操作，用于修改state中的值
@@ -41,9 +52,6 @@ const mutations = {
     // 此处为获取state中的值，进行了修改
     state.list = payload.data;
     state.total = payload.total;
-  },
-  [types.PAGEADD](state, payload) {
-    state.pageadd = payload;
   },
 };
 

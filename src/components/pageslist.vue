@@ -12,8 +12,8 @@
       <el-table-column prop="use" label="发布人" width="200"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="update(scope.row.id)">修改</el-button>
-          <el-button size="mini" type="danger" @click="deleted(scope.row.id)">删除</el-button>
+          <el-button size="mini" type="primary" @click="update(scope.row._id)">修改</el-button>
+          <el-button size="mini" type="danger" @click="remove(scope.row._id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -29,28 +29,27 @@ export default {
   props: {
     list: null,
     data: null,
+    id: null,
   },
   methods: {
-    ...mapActions('column', ['query']),
+    ...mapActions('page', ['delete']),
+    open(msg) {
+      this.$message({
+        message: msg,
+        type: 'success',
+      });
+    },
     update(id) {
       //更改跳转
-      this.tab = false;
       this.$router.push({ path: this.$route.name + '/add', query: { id } });
     },
-    // deleted(id) {
-    //   this.$router.push({ path: this.$route.name + '/add', query: { id } });
-    // },
-    async deleted(id) {
-      try {
-        const res = await this.delete({ id: id });
-        if (res.data.errcode == 0) {
-          this.open('删除成功');
-        } else {
-          this.$message.error(res.data.errmsg);
-        }
-      } catch (err) {
-        console.log(err);
-        this.$message.error(err);
+    async remove(id) {
+      const res = await this.delete({ id: id });
+      if (res.data.errcode == 0) {
+        this.open('删除成功');
+        this.$emit('success');
+      } else {
+        this.$message.error('删除失败');
       }
     },
   },
