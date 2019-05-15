@@ -55,16 +55,17 @@ export default {
       });
     },
     async doupdate() {
+      console.log(this.id);
       const res = await this.update({
         name: this.name,
         content: this.value,
         id: this.id,
       });
-      if (res.date.errcode == 0) {
+      if (res.data.errcode == 0) {
         this.open('修改成功');
         this.$router.push({ path: '/pages' });
       } else {
-        this.$message.error(res.date.errmsg);
+        this.$message.error(res.data.errmsg);
       }
     },
 
