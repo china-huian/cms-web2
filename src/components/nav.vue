@@ -54,7 +54,6 @@ export default {
     },
     link(address) {
       this.$router.push({ name:address });
-      // console.log(item.link);
     },
   },
   computed: {
