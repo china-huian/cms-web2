@@ -34,6 +34,7 @@ export default {
     update(id) {
       //更改跳转
       this.$router.push({ path: this.$route.name + '/add', query: { id } });
+      console.log(this.$route);
     },
     async remove(id) {
       // console.log(id);

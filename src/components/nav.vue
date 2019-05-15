@@ -23,9 +23,10 @@
             v-for="(item, idx) in list"
             :key="idx"
             :index="String(i + '-' + idx)"
-            @click="btn(item)"
+            @click="link(item.link)"
           >{{ item.name }}</el-menu-item>
         </el-submenu>
+
       </template>
     </el-menu>
   </div>
@@ -33,7 +34,6 @@
 
 <script>
 import nav from '@/store/modules/nav-list.js'
-import navChild from '@/store/modules/nav.js';
 import { mapActions, mapState } from 'vuex';
 export default {
   name: 'nav-list',
@@ -47,14 +47,19 @@ export default {
     this.query();
   },
   methods: {
-    ...mapActions('column', ['query']),
+    ...mapActions('nav', ['query']),
     btn(item) {
       this.$router.push(item.link);
+      this.query();
+    },
+    link(item) {
+      this.$router.push({ name:item });
+      // console.log(item.link);
     },
   },
   computed: {
     ...mapState({
-      list: state => state.column.list,
+      list: state => state.nav.list,
     }),
   },
 };
