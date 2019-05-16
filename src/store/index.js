@@ -5,6 +5,8 @@ import menu from './modules/menu';
 // 引入各个模块
 import page from './modules/page';
 import nav from './modules/nav';
+import dispose from './modules/dispose';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -14,5 +16,6 @@ export default new Vuex.Store({
     // 将各模块挂载
     page,
     nav,
+    dispose,
   },
 });
