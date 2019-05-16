@@ -31,7 +31,4 @@ export default {
   width: 100%;
   margin: 0;
 }
-/* .addbtn {
-  margin-top: 1.6em;
-} */
 </style>

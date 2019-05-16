@@ -24,13 +24,13 @@
       </el-table-column>
     </el-table>-->
     <el-tree class="tree" :data="data" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
-    <el-button class="fd1 addbtn" type="success" @click="add">
-      <i class="el-icon-edit-outline  el-icon--left"></i>
-      新建菜单
+    <el-button class="addbtn" type="success" @click="add" style="margain-left : 20px">
+      <i class="el-icon-edit-outline el-icon--left"></i>
+      新建一级菜单
     </el-button>
-    <el-button class="fd1 addbtn" type="danger" @click="add">
-      <i class="el-icon-delete  el-icon--left"></i>
-      删除
+    <el-button class="addbtn" type="success" @click="add">
+      <i class="el-icon-edit-outline el-icon--left"></i>
+      新建二级菜单
     </el-button>
 
     <div class="content">
@@ -55,45 +55,11 @@
         <el-form-item label="排序" prop="id">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="时间" required>
-          <el-col :span="11">
-            <el-form-item prop="date1">
-              <el-date-picker
-                type="date"
-                placeholder="选择日期"
-                v-model="ruleForm.date1"
-                style="width: 100%;"
-              ></el-date-picker>
-            </el-form-item>
-          </el-col>
-          <el-col class="line" :span="2">-</el-col>
-          <el-col :span="11">
-            <el-form-item prop="date2">
-              <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-            </el-form-item>
-          </el-col>
-        </el-form-item> -->
-        <!-- <el-form-item label="即时配送" prop="delivery">
-          <el-switch v-model="ruleForm.delivery"></el-switch>
-        </el-form-item> -->
-        <!-- <el-form-item label="活动性质" prop="type">
-          <el-checkbox-group v-model="ruleForm.type">
-            <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-            <el-checkbox label="地推活动" name="type"></el-checkbox>
-            <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-            <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-          </el-checkbox-group>
-        </el-form-item> -->
-        <!-- <el-form-item label="特殊资源" prop="resource">
-          <el-radio-group v-model="ruleForm.resource">
-            <el-radio label="线上品牌商赞助"></el-radio>
-            <el-radio label="线下场地免费"></el-radio>
-          </el-radio-group>
-        </el-form-item> -->
-        <!-- <el-form-item label="活动形式" prop="desc">
-          <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-        </el-form-item> -->
         <el-form-item>
+          <el-button class="fd1 addbtn" type="danger" @click="add">
+            <i class="el-icon-delete el-icon--left"></i>
+            删除
+          </el-button>
           <el-button type="primary" @click="submitForm('ruleForm')">创建</el-button>
           <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
@@ -201,6 +167,7 @@ export default {
 .tree {
   /* background-color: #123456; */
   float: left;
+  margin-top: 1em;
   width: 20%;
 }
 .content {

@@ -12,17 +12,13 @@
         <el-input
           type="textarea"
           class="inputname block"
-          :autosize="{ minRows: 2, maxRows: 4}"
+          :autosize="{ minRows: 2, maxRows: 4 }"
           placeholder="请输入具体内容"
           v-model="value"
           style="width :100%"
         ></el-input>
-        <el-button v-if="!id" class="fd1 addbtn" type="primary" @click="upadd">
-          <i class="el-icon-circle-check el-icon--left"></i>确认添加
-        </el-button>
-        <el-button v-else class="fd1 addbtn" type="primary" @click="updates">
-          <i class="el-icon-circle-check el-icon--left"></i>确认修改
-        </el-button>
+        <el-button v-if="!id" class="fd1 addbtn" type="primary" @click="upadd"> <i class="el-icon-circle-check el-icon--left"></i>确认添加 </el-button>
+        <el-button v-else class="fd1 addbtn" type="primary" @click="updates"> <i class="el-icon-circle-check el-icon--left"></i>确认修改 </el-button>
       </div>
     </div>
   </div>

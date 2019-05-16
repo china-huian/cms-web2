@@ -11,7 +11,6 @@
           <el-button class="fd1" size="mini" type="primary" @click="update(scope.row._id)">修改</el-button>
           <el-button class="fd1" size="mini" type="danger" @click="remove(scope.row._id)">删除</el-button>
         </template>
-      
       </el-table-column>
     </el-table>
   </div>

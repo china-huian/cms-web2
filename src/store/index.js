@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import column from './modules/column';
 import menu from './modules/menu';
 // 引入各个模块
-import page from './modules/page';
+// import page from './modules/page';
 import nav from './modules/nav';
 import dispose from './modules/dispose';
 
@@ -14,7 +14,6 @@ export default new Vuex.Store({
     column,
     menu,
     // 将各模块挂载
-    page,
     nav,
     dispose,
   },
