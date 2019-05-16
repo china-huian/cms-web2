@@ -36,12 +36,6 @@ export default {
   },
   methods: {
     ...mapActions('page', ['query']),
-    open(msg) {
-      this.$message({
-        message: msg,
-        type: 'success',
-      });
-    },
     add() {
       this.$router.push('pages/add');
     },

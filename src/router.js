@@ -6,14 +6,10 @@ import Pages from './views/pages/index.vue';
 import PagesAdd from './views/pages/add.vue';
 import Menu from './views/menu/index.vue';
 import MenuAdd from './views/menu/add.vue';
+import Content from './views/content/index.vue';
+import ContentAdd from './views/content/add.vue';
 import Dispose from './views/dispose/index.vue';
 import DisposeAdd from './views/dispose/add.vue';
-import News from './views/content/news/index.vue';
-import NewsAdd from './views/content/news/add.vue';
-import Information from './views/content/information/index.vue';
-import InformationAdd from './views/content/information/add.vue';
-import Focus from './views/content/focus/index.vue';
-import FocusAdd from './views/content/focus/add.vue';
 
 Vue.use(Router);
 
@@ -55,6 +51,16 @@ export default new Router({
       component: MenuAdd,
     },
     {
+      path: '/content',
+      name: 'content',
+      component: Content,
+    },
+    {
+      path: '/content/add',
+      name: 'contentadd',
+      component: ContentAdd,
+    },
+    {
       path: '/dispose',
       name: 'dispose',
       component: Dispose,
@@ -63,36 +69,6 @@ export default new Router({
       path: '/dispose/add',
       name: 'dispose-add',
       component: DisposeAdd,
-    },
-    {
-      path: '/content/news',
-      name: 'news',
-      component: News,
-    },
-    {
-      path: '/content/news/add',
-      name: 'newsadd',
-      component: NewsAdd,
-    },
-    {
-      path: '/content/information',
-      name: 'information',
-      component: Information,
-    },
-    {
-      path: '/content/information/add',
-      name: 'informationadd',
-      component: InformationAdd,
-    },
-    {
-      path: '/content/focus',
-      name: 'focus',
-      component: Focus,
-    },
-    {
-      path: '/content/focus/add',
-      name: 'focusadd',
-      component: FocusAdd,
     },
   ],
 });

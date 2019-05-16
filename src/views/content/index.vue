@@ -1,13 +1,13 @@
 <template>
   <div class="box">
     <div class="title fj block">
-      <span class="fd1">新闻焦点</span>
-      <el-button class="fd2 addbtn" type="success" @click="add3">
+      <span class="fd1">内容管理</span>
+      <el-button class="fd2 addbtn" type="success" @click="add">
         <i class="el-icon-edit-outline el-icon--left"></i>
-        添加焦点
+        添加内容
       </el-button>
     </div>
-    <Newslist class="list" :list="newslist3"></Newslist>
+    <Newslist class="list" :list="newslist1"></Newslist>
     <Pagination />
   </div>
 </template>
@@ -15,15 +15,16 @@
 <script>
 import Newslist from '@/components/newslist';
 import Pagination from '@/components/pagination';
+import { mapActions, mapState } from 'vuex';
 export default {
   data() {
     return {
-      newslist3: [
+      newslist1: [
         {
-          name: '焦点',
+          name: '慧安通信',
           date: '2020-20-20',
-          count: '122',
-          publisher: 'ass',
+          count: '1111',
+          publisher: 'asd',
           state: '已发布',
         },
       ],
@@ -33,9 +34,13 @@ export default {
     Newslist,
     Pagination,
   },
+  mounted() {
+    this.query({ skip: 1, limit: 20 });
+  },
   methods: {
-    add3() {
-      this.$router.push('./focus/add');
+    ...mapActions('content', ['query']),
+    add() {
+      this.$router.push('content/add');
     },
   },
 };

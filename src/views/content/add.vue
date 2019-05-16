@@ -5,6 +5,11 @@
     </div>
     <div class="input">
       <el-input class="inputname block" v-model="name" placeholder="请输入名称"></el-input>
+      <el-input class="inputname block" v-model="tag" placeholder="请输入标签"></el-input>
+      <ul class="span">
+        <li>出山</li>
+        <li>出山</li>
+      </ul>
     </div>
     <Wangeditor v-if="id !== null || value !== null" v-model="value"></Wangeditor>
     <el-button class="fd1 addbtn" type="primary" @click="doadd"><i class="el-icon-circle-check el-icon--left"></i>确认添加</el-button>
@@ -12,13 +17,14 @@
 </template>
 <script>
 import Wangeditor from '@/components/wangeditor';
-import { mapActios, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 export default {
   data() {
     return {
       name: '',
       id: null,
       value: '',
+      tag: null,
     };
   },
   components: {
@@ -35,7 +41,7 @@ export default {
     }
   },
   methods: {
-    // ...mapActions('content', ['add']),
+    ...mapActions('content', ['fetch', 'add']),
     open(msg) {
       this.$message({
         message: msg,
@@ -64,6 +70,23 @@ export default {
 <style load="loss" scoped>
 @import '~@/assets/style.less';
 .input {
-  width: 40%;
+  width: 25%;
+  position: relative;
+}
+.span {
+  display: block;
+  width: 50%;
+  height: 40px;
+  /* background: white; */
+  position: absolute;
+  right: -55%;
+  bottom: 21%;
+  line-height: 40px;
+  color: midnightblue;
+}
+.span li {
+  float: left;
+  /* list-style: circle inside; */
+  margin-right: 10px;
 }
 </style>

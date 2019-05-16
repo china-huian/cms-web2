@@ -2,6 +2,11 @@ import axios from 'axios';
 import * as types from '../types.js';
 import api from './api';
 
+const state = {
+  list: null,
+  total: null,
+};
+
 const actions = {
   async query({ commit }, paging = {}) {
     const res = await axios.post(api.contentQuery, paging);
@@ -16,9 +21,22 @@ const actions = {
     const res = await axios.post(api.contentAdd, { ...paging });
     return res;
   },
+  async fetch({ commit }, paging = {}) {
+    const res = await axios.post(api.contentFetch, { ...paging });
+    return res;
+  },
+};
+
+const mutations = {
+  [types.CONTENTQUERY](state, payload) {
+    state.list = payload.data;
+    state.total = payload.total;
+  },
 };
 
 export default {
   namespaced: true,
   actions,
+  mutations,
+  state,
 };
