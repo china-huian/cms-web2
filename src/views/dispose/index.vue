@@ -7,29 +7,36 @@
         添加配置
       </el-button>
     </div>
-    <!-- <Columnlist class="list" :data="pageslist"></Columnlist> -->
-    <Columnlist class="list" :list="Array(...list)" :limit="limit" :skip="skip"></Columnlist>
+    <List class="list" :list="list" v-on:remove="remove" :limit="limit"></List>
+    <!-- <Columnlist class="list" :list="Array(...list)" :limit="limit" :skip="skip"></Columnlist> -->
     <Pagination :total="total" v-on:pagination="paging" :limit="limit"></Pagination>
   </div>
 </template>
 
 <script>
-import Columnlist from '@/components/columnlist';
+import List from '@/components/list';
 import Pagination from '@/components/pagination';
 import { mapActions, mapState } from 'vuex';
 export default {
+  name: 'dispose',
   data() {
     return {
       skip: 1,
-      limi: 10,
+      limit: 10,
     };
   },
   components: {
-    Columnlist,
+    List,
     Pagination,
   },
   methods: {
-    ...mapActions('dispose', ['query']),
+    ...mapActions('dispose', ['query', 'delete']),
+    open(msg) {
+      this.$message({
+        message: msg,
+        type: 'success',
+      });
+    },
     add() {
       this.$router.push('dispose/add');
     },
@@ -37,6 +44,23 @@ export default {
       this.skip = skip;
       this.limit = limit;
       this.query({ skip: skip, limit: limit });
+    },
+
+    async remove(id) {
+      // 删除
+      try {
+        const res = await this.delete({ id: id });
+        // console.log(res.data);
+        if (res.data.errcode == 0) {
+          this.open('删除成功');
+          this.query({ skip: this.skip, limit: this.limit });
+        } else {
+          this.$message.error(res.data.errmsg);
+          console.log(res.data.errmsg);
+        }
+      } catch (err) {
+        this.$message.error(err);
+      }
     },
   },
   mounted() {
@@ -56,7 +80,4 @@ export default {
   width: 100%;
   margin: 0;
 }
-/* .addbtn {
-  margin-top: 1.6em;
-} */
 </style>
