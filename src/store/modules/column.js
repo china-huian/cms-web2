@@ -12,7 +12,7 @@ const actions = {
     const res = await axios.post(api.columnQuery, paging);
     if (res.data.errcode == 0) {
       // commit(types.COLUMNQUERY, { data: res.data.data, total: res.data.total });
-      commit(types.COLUMNFETCH, res.data);
+      commit(types.COLUMNQUERY, res.data);
       // console.log(res.data.data);
       return res;
     } else {

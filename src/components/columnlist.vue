@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div class="  ">
     <el-table :data="list" style="width: 100%" height="70vh">
       <!-- <el-table :data="list.slice((skip-1)*page-size, skip*page-size)" style="width: 100%" height="70vh"> -->
       <el-table-column prop="name" label="名称" width="350"></el-table-column>

@@ -11,7 +11,28 @@ const actions = {
   async query({ commit }, paging = {}) {
     const res = await axios.post(api.navQuery, paging);
     if (res.data.error == 0) {
-      commit(types.MENUQUERY, res.data);
+      commit(types.NAVQUERY, res.data);
+      return res;
+    } else {
+      return res;
+    }
+  },
+  async add({ commit }, paging = {}) {
+    const res = await axios.post(api.navAdd, paging);
+    return res;
+  },
+  async delete({ commit }, paging = {}) {
+    const res = await axios.post(api.navDelete, paging);
+    return res;
+  },
+  async updata({ commit }, paging = {}) {
+    const res = await axios.post(api.navUpdata, paging);
+    return res;
+  },
+  async fetch({ commit }, paging = {}) {
+    const res = await axios.post(api.navFetch, paging);
+    if (res.data.error == 0) {
+      commit(types.NAVFETCH, res.data);
       return res;
     } else {
       return res;
@@ -20,7 +41,11 @@ const actions = {
 };
 
 const mutations = {
-  [types.MENUQUERY](state, payload) {
+  [types.NAVQUERY](state, payload) {
+    state.list = payload.data;
+    state.total = payload.total;
+  },
+  [types.NAVFETCH](state, payload) {
     state.list = payload.data;
     state.total = payload.total;
   },
