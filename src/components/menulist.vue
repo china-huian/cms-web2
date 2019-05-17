@@ -1,31 +1,32 @@
 <template>
   <div class="block">
     <el-tree class="tree" :data="list" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
+
     <div class="content">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form :model="listForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="名称" prop="name">
-          <el-input class="input" v-model="ruleForm.name"></el-input>
+          <el-input class="input" v-model="listForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="类型" prop="region">
-          <el-select class="fd1" v-model="ruleForm.region" placeholder="请选择内容">
-            <el-option label="栏目" value="lanmu"></el-option>
-            <el-option label="单页" value="danye"></el-option>
-            <el-option label="链接" value="lianjei"></el-option>
+        <el-form-item label="类型">
+          <el-select class="fd1" v-model="listForm.type" placeholder="请选择内容">
+            <el-option label="空" value=""></el-option>
+            <el-option label="栏目" value="0"></el-option>
+            <el-option label="单页" value="1"></el-option>
+            <el-option label="链接" value="2"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="绑定id" prop="region">
-          <el-select class="fd1" v-model="ruleForm.region" placeholder="请选择内容">
-            <el-option label="菜单内容" value="lanmu"></el-option>
-            <el-option label="菜单内容" value="danye"></el-option>
-            <el-option label="菜单内容" value="lianjei"></el-option>
+        <el-form-item label="绑定id">
+          <el-select class="fd1" v-model="listForm.binding" placeholder="选择绑定的id">
+            <el-option label="空" value=" "></el-option>
+          
           </el-select>
         </el-form-item>
         <el-form-item label="排序" prop="index">
-          <el-input class="input" v-model="ruleForm.id"></el-input>
+          <el-input class="input" v-model="listForm.index"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="链接" prop="link">
-          <el-input class="input" v-model="ruleForm.link"></el-input>
-        </el-form-item> -->
+        <el-form-item label="链接" prop="link" v-if="listForm.index == '2'">
+          <el-input class="input" v-model="listForm.url"></el-input>
+        </el-form-item>
         <el-form-item>
           <el-button class="fd1 addbtn" type="success" @click="add">
             <i class="el-icon-edit-outline el-icon--left"></i>
@@ -47,32 +48,48 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+// import { mapActions } from 'vuex';
+import { createNamespacedHelpers } from 'vuex';
+const { mapActions: pageActions } = createNamespacedHelpers('page');
+const { mapActions: columnActions } = createNamespacedHelpers('column');
+const { mapActions } = createNamespacedHelpers('menu');
 export default {
   data() {
     return {
+      listForm: {
+        name: null,
+        type: null,
+        binding: null,
+        index: null,
+        url: null,
+        // delivery: true,
+      },
       defaultProps: {
         children: 'children',
         label: 'name',
-        // name: 'name',
-      },
-      ruleForm: {
-        name: '',
-        index: '',
-        // delivery: false,
       },
       rules: {
         // name: [{ required: true, message: '请输入名称', trigger: 'blur' }, { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }],
         name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
         index: [{ required: true, message: '请输入排序index', trigger: 'blur' }],
+        link: [{ required: true, message: '请输入链接', trigger: 'blur' }],
       },
     };
   },
   methods: {
-    ...mapActions('menu', ['query', 'delete', 'update', 'add', 'fetch']),
-
+    // ...mapActions('menu', ['query', 'delete', 'update', 'add', 'fetch']),
+    ...pageActions({ queryPage: 'query' }),
+    ...columnActions({ queryColumn: 'column' }),
+    ...mapActions(['query', 'add', 'delete', 'update', 'fetch']),
     handleNodeClick(data) {
       console.log(data);
+      // console.log(data.name)
+      this.listForm.name = data.name;
+      this.listForm.index = data.index;
+      this.listForm.type = data.type;
+      this.listForm.binding = data.binding;
+      this.listForm.url = data.url;
+      console.log(data._id);
     },
     submitForm() {
       // console.log(list);
@@ -86,6 +103,7 @@ export default {
     list: null,
     total: null,
   },
+  mounted() {},
 };
 </script>
 
