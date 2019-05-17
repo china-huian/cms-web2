@@ -1,28 +1,5 @@
 <template>
   <div class="block">
-    <!-- <el-table :data="data" style="width: 100%" height="70vh">
-      <el-table-column label="菜单名称" width="250">
-        <template slot-scope="scope">
-          <span>{{ scope.row.name }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="创建时间" width="250">
-        <template slot-scope="scope">
-          <span>{{ scope.row.date }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="排序" width="180">
-        <template slot-scope="scope">
-          <span>{{ scope.row.date }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>-->
     <el-tree class="tree" :data="data" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
     <el-button class="addbtn" type="success" @click="add" style="margain-left : 20px">
       <i class="el-icon-edit-outline el-icon--left"></i>
@@ -32,7 +9,6 @@
       <i class="el-icon-edit-outline el-icon--left"></i>
       新建二级菜单
     </el-button>
-
     <div class="content">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="名称" prop="name">
