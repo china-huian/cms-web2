@@ -7,7 +7,7 @@
         添加一级菜单
       </el-button>
     </div>
-    <Menulist class="list" :list="list"></Menulist>
+    <Menulist class="list" :list="list" ></Menulist>
   </div>
 </template>
 
@@ -22,20 +22,27 @@ export default {
     Menulist,
   },
   methods: {
-    ...mapActions('menu', ['query', 'add', 'update', 'delete', 'fetch']),
+    ...mapActions('menu', ['query']),
     add() {
       this.$router.push('menu/add');
     },
   },
   computed: {
     ...mapState({
+      // list: state => state.menu.list,
       list: state => state.menu.list,
       total: state => state.menu.total,
     }),
   },
   mounted() {
     this.query();
+    console.log(this.list);
   },
+  watch: {
+    list: function(val){
+      console.log(val);
+    }
+  }
 };
 </script>
 <style load="loss" scoped>

@@ -10,7 +10,7 @@ const state = {
 const actions = {
   async query({ commit }, paging = {}) {
     const res = await axios.post(api.navQuery, paging);
-    if (res.data.error == 0) {
+    if (res.data.errcode == 0) {
       commit(types.NAVQUERY, res.data);
       return res;
     } else {
@@ -31,7 +31,7 @@ const actions = {
   },
   async fetch({ commit }, paging = {}) {
     const res = await axios.post(api.navFetch, paging);
-    if (res.data.error == 0) {
+    if (res.data.errcode == 0) {
       commit(types.NAVFETCH, res.data);
       return res;
     } else {

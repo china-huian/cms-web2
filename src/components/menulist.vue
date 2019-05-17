@@ -1,25 +1,13 @@
 <template>
   <div class="block">
-    <el-tree
-      class="tree"
-      :data="list"
-      :props="defaultProps"
-      accordion
-      @node-click="handleNodeClick"
-    ></el-tree>
+    <el-tree class="tree" :data="list" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
     <div class="content">
-      <el-form
-        :model="ruleForm"
-        :rules="rules"
-        ref="ruleForm"
-        label-width="100px"
-        class="demo-ruleForm"
-      >
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="名称" prop="name">
           <el-input class="input" v-model="ruleForm.name"></el-input>
         </el-form-item>
         <el-form-item label="类型" prop="region">
-          <el-select  class="fd1" v-model="ruleForm.region" placeholder="请选择内容">
+          <el-select class="fd1" v-model="ruleForm.region" placeholder="请选择内容">
             <el-option label="栏目" value="lanmu"></el-option>
             <el-option label="单页" value="danye"></el-option>
             <el-option label="链接" value="lianjei"></el-option>
@@ -35,6 +23,9 @@
         <el-form-item label="排序" prop="index">
           <el-input class="input" v-model="ruleForm.id"></el-input>
         </el-form-item>
+        <!-- <el-form-item label="链接" prop="link">
+          <el-input class="input" v-model="ruleForm.link"></el-input>
+        </el-form-item> -->
         <el-form-item>
           <el-button class="fd1 addbtn" type="success" @click="add">
             <i class="el-icon-edit-outline el-icon--left"></i>
@@ -60,43 +51,10 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      // data: [
-      //   {
-      //     // name: '菜单管理',
-      //     // date: '2019-04-25',
-      //     label: '一级 1',
-      //     children: [
-      //       {
-      //         label: '二级 1-1',
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     label: '一级 2',
-      //     children: [
-      //       {
-      //         label: '二级 2-1',
-      //       },
-      //       {
-      //         label: '二级 2-2',
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     label: '一级 3',
-      //     children: [
-      //       {
-      //         label: '二级 3-1',
-      //       },
-      //       {
-      //         label: '二级 3-2',
-      //       },
-      //     ],
-      //   },
-      // ],
       defaultProps: {
         children: 'children',
-        label: 'label',
+        label: 'name',
+        // name: 'name',
       },
       ruleForm: {
         name: '',
@@ -111,28 +69,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions('menu', ['query','delete','update','add','fetch']),
-    // 删除的open事件
-    // open(msg) {
-    //   this.$message({
-    //     message: msg,
-    //     type: 'success',
-    //   });
-    // },
-    handleNodeClick() {},
-    // 创建内容点击事件
-    // submitForm(formName) {
-    //   this.$refs[formName].validate(valid => {
-    //     if (valid) {
-    //       alert('submit!');
-    //     } else {
-    //       console.log('error submit!!');
-    //       return false;
-    //     }
-    //   });
-    // },
+    ...mapActions('menu', ['query', 'delete', 'update', 'add', 'fetch']),
+
+    handleNodeClick(data) {
+      console.log(data);
+    },
     submitForm() {
-      console.log(list);
+      // console.log(list);
     },
     // 重置
     // resetForm(formName) {
@@ -168,11 +111,11 @@ export default {
   margin: 1em;
   /* background-color: #b52415; */
 }
-.addbtn{
- text-align: center;
- margin-right: 2em;
+.addbtn {
+  text-align: center;
+  margin-right: 2em;
 }
-.input{
+.input {
   width: 50%;
   float: left;
 }
