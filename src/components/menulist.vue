@@ -1,15 +1,27 @@
 <template>
   <div class="block">
-    <el-tree class="tree" :data="list" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
+    <el-tree
+      class="tree"
+      :data="list"
+      :props="defaultProps"
+      accordion
+      @node-click="handleNodeClick"
+    ></el-tree>
 
     <div class="content">
-      <el-form :model="listForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form
+        :model="listForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
         <el-form-item label="名称" prop="name">
           <el-input class="input" v-model="listForm.name"></el-input>
         </el-form-item>
         <el-form-item label="类型">
-          <el-select class="fd1" v-model="listForm.type" placeholder="请选择内容">
-            <el-option label="空" value=""></el-option>
+          <el-select class="fd1" v-model="listForm.type" @change="typequery(listForm.type)" placeholder="请选择内容">
+            <el-option label="空" value></el-option>
             <el-option label="栏目" value="0"></el-option>
             <el-option label="单页" value="1"></el-option>
             <el-option label="链接" value="2"></el-option>
@@ -18,7 +30,12 @@
         <el-form-item label="绑定id">
           <el-select class="fd1" v-model="listForm.binding" placeholder="选择绑定的id">
             <el-option label="空" value=" "></el-option>
-          
+            <el-option
+              v-for="(item, index) in typelist"
+              :key="index"
+              :label="item.name"
+              :value="item._id"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="排序" prop="index">
@@ -50,20 +67,23 @@
 <script>
 // import { mapActions } from 'vuex';
 import { createNamespacedHelpers } from 'vuex';
-const { mapActions: pageActions } = createNamespacedHelpers('page');
+const { mapActions: pageActions } = createNamespacedHelpers('pages');
 const { mapActions: columnActions } = createNamespacedHelpers('column');
 const { mapActions } = createNamespacedHelpers('menu');
 export default {
   data() {
+    1;
     return {
       listForm: {
         name: null,
         type: null,
-        binding: null,
+        binding: this.typelist,
         index: null,
         url: null,
         // delivery: true,
       },
+      id: null,
+      typelist: null,
       defaultProps: {
         children: 'children',
         label: 'name',
@@ -79,7 +99,7 @@ export default {
   methods: {
     // ...mapActions('menu', ['query', 'delete', 'update', 'add', 'fetch']),
     ...pageActions({ queryPage: 'query' }),
-    ...columnActions({ queryColumn: 'column' }),
+    ...columnActions({ queryColumn: 'query' }),
     ...mapActions(['query', 'add', 'delete', 'update', 'fetch']),
     handleNodeClick(data) {
       console.log(data);
@@ -98,6 +118,16 @@ export default {
     // resetForm(formName) {
     //   this.$refs[formName].resetFields();
     // },
+    async typequery(type) {
+      console.log(type);
+      if (type == '0') {
+        const res = await this.queryColumn();
+        this.typelist = res.data.data;
+      } else if (type == '1') {
+        const res = await this.queryPage();
+        this.typelist = res.data.data;
+      }
+    },
   },
   props: {
     list: null,
