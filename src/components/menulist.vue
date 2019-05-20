@@ -20,14 +20,19 @@
           <el-input class="input" v-model="listForm.name"></el-input>
         </el-form-item>
         <el-form-item label="类型">
-          <el-select class="fd1" v-model="listForm.type" @change="typequery(listForm.type)" placeholder="请选择内容">
+          <el-select
+            class="fd1"
+            v-model="listForm.type"
+            @change="typequery(listForm.type)"
+            placeholder="请选择内容"
+          >
             <el-option label="空" value></el-option>
             <el-option label="栏目" value="0"></el-option>
             <el-option label="单页" value="1"></el-option>
             <el-option label="链接" value="2"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="绑定id">
+        <el-form-item label="绑定id" v-if="listForm.type != '2'">
           <el-select class="fd1" v-model="listForm.binding" placeholder="选择绑定的id">
             <el-option label="空" value=" "></el-option>
             <el-option
@@ -41,11 +46,11 @@
         <el-form-item label="排序" prop="index">
           <el-input class="input" v-model="listForm.index"></el-input>
         </el-form-item>
-        <el-form-item label="链接" prop="link" v-if="listForm.index == '2'">
+        <el-form-item label="链接" prop="link" v-if="listForm.type == '2'">
           <el-input class="input" v-model="listForm.url"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button class="fd1 addbtn" type="success" @click="add">
+          <el-button class="fd1 addbtn" type="success" @click="add" v-if="listForm.id != null">
             <i class="el-icon-edit-outline el-icon--left"></i>
             新建二级菜单
           </el-button>
@@ -97,18 +102,20 @@ export default {
     };
   },
   methods: {
-    // ...mapActions('menu', ['query', 'delete', 'update', 'add', 'fetch']),
     ...pageActions({ queryPage: 'query' }),
     ...columnActions({ queryColumn: 'query' }),
     ...mapActions(['query', 'add', 'delete', 'update', 'fetch']),
     handleNodeClick(data) {
-      // console.log(data);
+      console.log(data);
       // console.log(data.name)
       this.listForm.name = data.name;
       this.listForm.index = data.index;
+      // 应该是排序
       this.listForm.type = data.type;
       this.listForm.binding = data.binding;
       this.listForm.url = data.url;
+      this.listForm.id = data._id;
+
       console.log(data._id);
     },
     submitForm() {
