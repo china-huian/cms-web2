@@ -67,7 +67,7 @@
 <script>
 // import { mapActions } from 'vuex';
 import { createNamespacedHelpers } from 'vuex';
-const { mapActions: pageActions } = createNamespacedHelpers('pages');
+const { mapActions: pageActions } = createNamespacedHelpers('page');
 const { mapActions: columnActions } = createNamespacedHelpers('column');
 const { mapActions } = createNamespacedHelpers('menu');
 export default {
@@ -102,7 +102,7 @@ export default {
     ...columnActions({ queryColumn: 'query' }),
     ...mapActions(['query', 'add', 'delete', 'update', 'fetch']),
     handleNodeClick(data) {
-      console.log(data);
+      // console.log(data);
       // console.log(data.name)
       this.listForm.name = data.name;
       this.listForm.index = data.index;
@@ -119,7 +119,7 @@ export default {
     //   this.$refs[formName].resetFields();
     // },
     async typequery(type) {
-      console.log(type);
+      // console.log(type);
       if (type == '0') {
         const res = await this.queryColumn();
         this.typelist = res.data.data;
