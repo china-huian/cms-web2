@@ -44,12 +44,16 @@
           </el-select>
         </el-form-item>
         <el-form-item label="排序" prop="index">
-          <el-input class="input" v-model="listForm.index"></el-input>
+          <el-input class="input" v-model="listForm.index" type="number"></el-input>
         </el-form-item>
         <el-form-item label="链接" prop="link" v-if="listForm.type == '2'">
           <el-input class="input" v-model="listForm.url"></el-input>
         </el-form-item>
         <el-form-item>
+          <el-button class="fd1 addbtn" type="success" @click="addOne">
+            <i class="el-icon-edit-outline el-icon--left"></i>
+            添加一级菜单
+          </el-button>
           <el-button class="fd1 addbtn" type="success" @click="add">
             <i class="el-icon-edit-outline el-icon--left"></i>
             新建二级菜单
@@ -58,7 +62,7 @@
             <i class="el-icon-circle-check el-icon--left"></i>
             创建
           </el-button>
-          <el-button class="fd1 addbtn" type="danger" @click="add">
+          <el-button class="fd1 addbtn" type="danger" @click>
             <i class="el-icon-delete el-icon--left"></i>
             删除
           </el-button>
@@ -87,7 +91,8 @@ export default {
         url: null,
         // delivery: true,
       },
-      id: null,
+      // id: null,
+      // 类型转换
       typelist: null,
       defaultProps: {
         children: 'children',
@@ -96,7 +101,7 @@ export default {
       rules: {
         // name: [{ required: true, message: '请输入名称', trigger: 'blur' }, { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }],
         name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
-        index: [{ required: true, message: '请输入排序index', trigger: 'blur' }],
+        index: [{ required: true, message: '请输入数字', trigger: 'blur' }],
         link: [{ required: true, message: '请输入链接', trigger: 'blur' }],
       },
     };
@@ -105,6 +110,12 @@ export default {
     ...pageActions({ queryPage: 'query' }),
     ...columnActions({ queryColumn: 'query' }),
     ...mapActions(['query', 'add', 'delete', 'update', 'fetch']),
+    open(msg) {
+      this.$message({
+        message: msg,
+        type: 'success',
+      });
+    },
     handleNodeClick(data) {
       console.log(data);
       // console.log(data.name)
@@ -115,10 +126,7 @@ export default {
       // 获取了id，应该根据id把内容显示在这里
       this.listForm.binding = data.binding;
       this.listForm.url = data.url;
-      console.log(data._id);
-    },
-    submitForm() {
-      // console.log(list);
+      // console.log(data._id);
     },
     // 重置
     // resetForm(formName) {
@@ -134,11 +142,34 @@ export default {
         this.typelist = res.data.data;
       }
     },
+    addOne(data) {
+      this.listForm.name = null;
+      this.listForm.index = null;
+      // 应该是排序自己输入的值
+      this.listForm.type = null;
+      // 获取了id，应该根据id把内容显示在这里
+      this.listForm.binding = null;
+      this.listForm.url = null;
+    },
+    // 添加
+    async submitForm() {
+      if (this.listForm.name !== null && this.listForm.index !== null) {
+        if (this.listForm.type == '2' && this.listForm.url == null) {
+          this.$message.error('请添加链接');
+        }
+        const res = await this.add({ ...this.listForm });
+        if (res.data.errcode == 0) {
+          this.open('添加成功');
+          this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: Array };
+        }
+      } else {
+        this.$message.error('请完整填写内容');
+      }
+    },
   },
   props: {
     list: null,
     total: null,
-    
   },
   mounted() {},
 };
@@ -165,10 +196,6 @@ export default {
   width: 70%;
   margin: 1em;
   /* background-color: #b52415; */
-}
-.addbtn {
-  text-align: center;
-  margin-right: 2em;
 }
 .input {
   width: 50%;

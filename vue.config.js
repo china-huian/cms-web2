@@ -11,7 +11,7 @@ module.exports = {
       // 配置跨域
       '/admin': {
         // 要访问的跨域的api的域名
-        target: 'http://192.168.1.29:7001/admin',
+        target: 'http://10.0.0.9:7001/admin',
         ws: true,
         changOrigin: true,
         pathRewrite: {
@@ -20,7 +20,7 @@ module.exports = {
       },
       '/public': {
         // 要访问的跨域的api的域名
-        target: 'http://192.168.1.29:7001/public',
+        target: 'http://10.0.0.9:7001/public',
         ws: true,
         changOrigin: true,
         pathRewrite: {

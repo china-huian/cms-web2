@@ -2,12 +2,12 @@
   <div class="box">
     <div class="title fj block">
       <span class="fd1">菜单管理</span>
-      <el-button class="fd2 addbtn" type="success" @click="add">
+      <!-- <el-button class="fd2 addbtn" type="success" @click="add">
         <i class="el-icon-edit-outline el-icon--left"></i>
         添加一级菜单
-      </el-button>
+      </el-button> -->
     </div>
-    <Menulist class="list" :list="list"></Menulist>
+    <Menulist class="list" :list="list" ></Menulist>
   </div>
 </template>
 
@@ -25,9 +25,7 @@ export default {
   },
   methods: {
     ...mapActions('menu', ['query']),
-    add() {
-      // console.log(this.id);
-      // this.$router.push('menu/add');
+    add(data) {
     },
   },
   computed: {

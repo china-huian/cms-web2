@@ -4,7 +4,6 @@ import api from './api';
 
 const state = {
   list: null,
-  total: null,
 };
 
 const actions = {
@@ -43,11 +42,9 @@ const actions = {
 const mutations = {
   [types.NAVQUERY](state, payload) {
     state.list = payload.data;
-    state.total = payload.total;
   },
   [types.NAVFETCH](state, payload) {
     state.list = payload.data;
-    state.total = payload.total;
   },
 };
 
