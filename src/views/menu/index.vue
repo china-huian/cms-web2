@@ -16,7 +16,9 @@ import Menulist from '@/components/menulist';
 import { mapActions, mapState } from 'vuex';
 export default {
   data() {
-    return {};
+    return {
+      // 这里面的id可能是listForm.id
+    };
   },
   components: {
     Menulist,
@@ -24,14 +26,14 @@ export default {
   methods: {
     ...mapActions('menu', ['query']),
     add() {
-      this.$router.push('menu/add');
+      // console.log(this.id);
+      // this.$router.push('menu/add');
     },
   },
   computed: {
     ...mapState({
       // list: state => state.menu.list,
       list: state => state.menu.list,
-      // total: state => state.menu.total,
     }),
   },
   mounted() {

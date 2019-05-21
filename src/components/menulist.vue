@@ -50,7 +50,7 @@
           <el-input class="input" v-model="listForm.url"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button class="fd1 addbtn" type="success" @click="add" v-if="listForm.id != null">
+          <el-button class="fd1 addbtn" type="success" @click="add">
             <i class="el-icon-edit-outline el-icon--left"></i>
             新建二级菜单
           </el-button>
@@ -110,12 +110,11 @@ export default {
       // console.log(data.name)
       this.listForm.name = data.name;
       this.listForm.index = data.index;
-      // 应该是排序
+      // 应该是排序自己输入的值
       this.listForm.type = data.type;
+      // 获取了id，应该根据id把内容显示在这里
       this.listForm.binding = data.binding;
       this.listForm.url = data.url;
-      this.listForm.id = data._id;
-
       console.log(data._id);
     },
     submitForm() {
@@ -139,6 +138,7 @@ export default {
   props: {
     list: null,
     total: null,
+    
   },
   mounted() {},
 };

@@ -2,19 +2,19 @@ export default {
   // 栏目接口
   columnQuery: 'admin/column/query',
   columnAdd: 'admin/column/add',
-  columnUpdate: 'admin/column/updata',
+  columnUpdate: 'admin/column/update',
   columnDelete: 'admin/column/delete',
   columnFetch: 'admin/column/fetch',
   // 单页接口
   pageQuery: 'admin/page/query',
   pageAdd: 'admin/page/add',
-  pageUpdata: 'admin/page/updata',
+  pageUpdate: 'admin/page/update',
   pageDelete: 'admin/page/delete',
   pageFetch: 'admin/page/fetch',
   // 菜单接口
   navQuery: 'admin/nav/query',
   navAdd: 'admin/nav/add',
-  navUpdata: 'admin/nav/updata',
+  navUpdate: 'admin/nav/update',
   navDelete: 'admin/nav/delete',
   navFetch: 'admin/nav/fetch',
   // 内容接口
@@ -26,7 +26,7 @@ export default {
   // 配置接口
   infoQuery: 'admin/info/query',
   infoAdd: 'admin/info/add',
-  infoUpdata: 'admin/info/updata',
+  infoUpdate: 'admin/info/update',
   infoDelete: 'admin/info/delete',
   infoFetch: 'admin/info/fetch',
 };

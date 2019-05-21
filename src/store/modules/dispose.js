@@ -26,7 +26,7 @@ const actions = {
     return res;
   },
   async update({ commit }, paging = {}) {
-    const res = await axios.post(api.infoUpdata, paging);
+    const res = await axios.post(api.infoUpdate, paging);
     return res;
   },
   async fetch({ commit }, paging = {}) {
