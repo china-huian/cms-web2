@@ -25,6 +25,15 @@ const actions = {
     const res = await axios.post(api.contentFetch, { ...paging });
     return res;
   },
+  async delete({ commit }, paging = {}) {
+    const res = await axios.post(api.contentDelete, { ...paging });
+    return res;
+  },
+  async update({ commit }, paging = {}) {
+    // console.log(paging);
+    const res = await axios.post(api.contentUpdate, { ...paging });
+    return res;
+  },
 };
 
 const mutations = {

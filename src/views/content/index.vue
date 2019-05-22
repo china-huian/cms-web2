@@ -7,7 +7,7 @@
         添加内容
       </el-button>
     </div>
-    <Newslist class="list" :list="newslist1"></Newslist>
+    <Newslist class="list" :list="list" v-on:success="success"></Newslist>
     <Pagination />
   </div>
 </template>
@@ -19,15 +19,7 @@ import { mapActions, mapState } from 'vuex';
 export default {
   data() {
     return {
-      newslist1: [
-        {
-          name: '慧安通信',
-          date: '2020-20-20',
-          count: '1111',
-          publisher: 'asd',
-          state: '已发布',
-        },
-      ],
+      id: null,
     };
   },
   components: {
@@ -35,12 +27,37 @@ export default {
     Pagination,
   },
   mounted() {
-    this.query({ skip: 1, limit: 20 });
+    this.id = this.$route.query.id;
+    if (this.id) {
+      this.query({ skip: 1, limit: 20, binding: this.id });
+    }
   },
   methods: {
     ...mapActions('content', ['query']),
+    open(msg) {
+      this.$message({
+        message: msg,
+        type: 'success',
+      });
+    },
     add() {
-      this.$router.push('content/add');
+      this.$router.push({ path: 'content/add', query: { bindingid: this.id } });
+    },
+    success() {
+      this.query({ skip: 1, limit: 20, binding: this.id });
+    },
+  },
+  computed: {
+    ...mapState({
+      list: state => state.content.list,
+    }),
+  },
+  watch: {
+    $route: function(val) {
+      this.id = val.query.id;
+    },
+    id: function() {
+      this.query({ skip: 1, limit: 20, binding: this.id });
     },
   },
 };

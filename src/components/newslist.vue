@@ -12,8 +12,8 @@
       <el-table-column prop="date" label="发布时间"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="update2(scope.row.id)">修改</el-button>
-          <el-button size="mini" type="danger" @click="deleted(scope.row.id)">删除</el-button>
+          <el-button size="mini" type="primary" @click="update(scope.row._id)">修改</el-button>
+          <el-button size="mini" type="danger" @click="remove(scope.row._id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -21,21 +21,39 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {};
   },
+  props: {
+    list: null,
+    id: null,
+  },
   methods: {
+    ...mapActions('content', ['delete']),
     link() {
       this.$router.push('./content/forthismoment');
     },
-    update2() {
-      // this.$router.push({ path: this.$route.name + '/add', query: { id } });
+    open(msg) {
+      this.$message({
+        message: msg,
+        type: 'success',
+      });
     },
-  },
-  props: {
-    list: null,
+    update(id) {
+      this.$router.push({ path: this.$route.name + '/add', query: { id } });
+      console.log(id);
+    },
+    async remove(id) {
+      const res = await this.delete({ id: id });
+      if (res.data.errcode == 0) {
+        this.open('删除成功');
+        this.$emit('success');
+      } else {
+        this.$message.error('删除失败');
+      }
+    },
   },
   watch: {
     data: function(val) {
