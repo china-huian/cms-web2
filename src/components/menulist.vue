@@ -1,14 +1,31 @@
 <template>
   <div class="block">
-    <el-tree class="tree" :data="list" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
+    <el-tree
+      class="tree"
+      :data="list"
+      :props="defaultProps"
+      accordion
+      @node-click="handleNodeClick"
+    ></el-tree>
 
     <div class="content">
-      <el-form :model="listForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form
+        :model="listForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
         <el-form-item label="名称" prop="name">
           <el-input class="input" v-model="listForm.name"></el-input>
         </el-form-item>
         <el-form-item label="类型">
-          <el-select class="fd1" v-model="listForm.type" @change="typequery(listForm.type)" placeholder="请选择内容">
+          <el-select
+            class="fd1"
+            v-model="listForm.type"
+            @change="typequery(listForm.type)"
+            placeholder="请选择内容"
+          >
             <el-option label="空" value></el-option>
             <el-option label="栏目" value="0"></el-option>
             <el-option label="单页" value="1"></el-option>
@@ -18,7 +35,12 @@
         <el-form-item label="绑定id" v-if="listForm.type != '2'">
           <el-select class="fd1" v-model="listForm.binding" placeholder="选择绑定的id">
             <el-option label="空" value=" "></el-option>
-            <el-option v-for="(item, index) in typelist" :key="index" :label="item.name" :value="item._id"></el-option>
+            <el-option
+              v-for="(item, index) in typelist"
+              :key="index"
+              :label="item.name"
+              :value="item._id"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="排序" prop="index">
@@ -27,77 +49,88 @@
         <el-form-item label="链接" prop="link" v-if="listForm.type == '2'">
           <el-input class="input" v-model="listForm.url"></el-input>
         </el-form-item>
-        <el-form-item v-if="children == false">
-          <el-button class="fd1 addbtn" type="success" @click="addOne" v-if="listForm.children.id == null">
+        <el-form-item>
+          <el-button class="fd1 addbtn" type="success" @click="addOne">
             <i class="el-icon-edit-outline el-icon--left"></i>
             添加一级菜单
           </el-button>
-          <el-button class="fd1 addbtn" type="success" @click="addTwo" v-if="listForm.id != null">
+          <el-button
+            class="fd1 addbtn"
+            type="success"
+            @click="addTow"
+            v-if="id && children == false"
+          >
             <i class="el-icon-edit-outline el-icon--left"></i>
             新建二级菜单
           </el-button>
-          <el-button class="fd1 addbtn" type="primary" @click="submitForm" v-if="listForm.id == null">
+          <el-button class="fd1 addbtn" type="primary" @click="submitForm" v-if="!id">
             <i class="el-icon-circle-check el-icon--left"></i>
             创建
           </el-button>
-          <el-button class="fd1 addbtn" type="primary" @click="updates" v-if="listForm.id != null">
+          <el-button
+            class="fd1 addbtn"
+            type="primary"
+            @click="updates"
+            v-if="id != null && children == false"
+          >
             <i class="el-icon-circle-check el-icon--left"></i>
             修改
           </el-button>
-          <el-button class="fd1 addbtn" type="danger" @click="remove">
+          <el-button
+            class="fd1 addbtn"
+            type="danger"
+            @click="remove"
+            v-if="id != null && children == false"
+          >
             <i class="el-icon-delete el-icon--left"></i>
             删除
           </el-button>
-          <el-button class="fd1 addbtn" type="primary" @click="ChildrenAdd">
+          <el-button
+            class="fd1 addbtn"
+            type="primary"
+            @click="ChildrenAdd"
+            v-if="id && children == true"
+          >
             <i class="el-icon-circle-check el-icon--left"></i>
             创建二级
           </el-button>
-          <!-- <el-button class="fd1 addbtn" @click="resetForm('ruleForm')">重置</el-button> -->
         </el-form-item>
-        <!-- <el-from-item v-if=" children == true">
-          <el-button class="fd1 addbtn" type="primary" @click="ChildrenAdd">
-            <i class="el-icon-circle-check el-icon--left"></i>
-            创建二级
-          </el-button>
-        </el-from-item> -->
       </el-form>
     </div>
   </div>
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
 import { createNamespacedHelpers } from 'vuex';
+import { constants } from 'crypto';
 const { mapActions: pageActions } = createNamespacedHelpers('page');
 const { mapActions: columnActions } = createNamespacedHelpers('column');
 const { mapActions } = createNamespacedHelpers('menu');
 export default {
   data() {
-    1;
     return {
       listForm: {
         name: null,
         type: null,
-        binding: this.typelist,
+        binding: null,
         index: null,
         url: null,
         children: [],
-        // delivery: true,
       },
       // 类型转换
       typelist: null,
       children: false, // 样式切换
-      Deposit: null, // 存储返回数据
+      Deposit: [], // 存储返回数据
       defaultProps: {
         children: 'children',
         label: 'name',
       },
       rules: {
-        // name: [{ required: true, message: '请输入名称', trigger: 'blur' }, { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }],
         name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
         index: [{ required: true, message: '请输入数字', trigger: 'blur' }],
         link: [{ required: true, message: '请输入链接', trigger: 'blur' }],
       },
+      id: null,
     };
   },
   methods: {
@@ -110,28 +143,20 @@ export default {
         type: 'success',
       });
     },
-    handleNodeClick(data) {
-      console.log(data);
-      // console.log(data.name)
-      this.listForm.name = data.name;
-      this.listForm.index = data.index;
-      // 应该是排序自己输入的值
-      // type 0 1 2
-      this.listForm.type = data.type;
-      // 获取了id，应该根据id把内容显示在这里
-      this.listForm.binding = data.binding;
-      this.listForm.url = data.url;
-      this.listForm.id = data._id;
-      // this.listForm.children = data.children;
-      // console.log(data._id);
+    async handleNodeClick(datas, a) {
+      this.children = false;
+      if (a.parent.data._id) {
+        this.id = a.parent.data._id;
+      } else {
+        this.id = datas._id;
+      }
+      this.listForm = { ...datas };
+      let res = await this.fetch({ id: this.id });
+      this.Deposit = res.data.data;
+      this.typequery(datas.type);
     },
-    // 重置
-    // resetForm(formName) {
-    //   this.$refs[formName].resetFields();
-    // },
     // 右侧动态的加载栏目单页的内容。
     async typequery(type) {
-      // console.log(type);
       if (type == '0') {
         const res = await this.queryColumn();
         this.typelist = res.data.data;
@@ -141,56 +166,44 @@ export default {
       }
     },
     // 添加一级菜单
-    addOne(data) {
-      this.listForm.name = null;
-      this.listForm.index = null;
-      this.listForm.type = null;
-      this.listForm.binding = null;
-      this.listForm.url = null;
-      this.listForm.id = null;
-      this.listForm.children = [];
+    addOne() {
+      this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
+      this.id = null;
+      this.children = false;
     },
-    // 添加二级菜单
-    addTwo() {
-      this.listForm.name = null;
-      this.listForm.index = null;
-      this.listForm.type = null;
-      this.listForm.url = null;
-      // this.listForm.id = data._id;
-      // this.children = true;
+    addTow() {
+      if (this.listForm._id) {
+        this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
+        this.children = true;
+      } else {
+        this.$message.error('只能给一级菜单添加');
+      }
     },
     async ChildrenAdd() {
       // 构造ID
-      this.listForm.children.id = Number(
+      this.listForm.id = Number(
         Math.random()
           .toString()
           .substr(3, length) + Date.now()
       ).toString(36);
-      this.Deposit.children.push(this.formInline);
-      const res = await this.update({ ...this.listForm.children });
+      this.Deposit.children.push(this.listForm);
+      const res = await this.update({
+        ...this.Deposit,
+        id: this.id,
+      });
       if (res.data.errcode == 0) {
-        this.open('添加成功');
+        this.open('添加二级菜单成功');
         this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
-        this.$emit('Success');
-        this.children = false;
+        this.query();
       }
     },
-    // 添加
+    // 添加一级
     async submitForm() {
-      // console.log(this.listForm);
-      if (this.listForm._id && this.listForm.children.length > 0) {
-        const res = await this.update({ ...this.listForm.children, id: this.listForm.children.id });
-        if (res.data.errcode == 0) {
-          this.open('添加二级菜单成功');
-          this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
-        }
-      }
       if (this.listForm.name !== null && this.listForm.index !== null) {
         if (this.listForm.type == '2' && this.listForm.url == null) {
           this.$message.error('请添加链接');
           return false;
         }
-        console.log(this.listForm);
         const res = await this.add({ ...this.listForm });
         if (res.data.errcode == 0) {
           this.open('添加成功');
@@ -203,32 +216,41 @@ export default {
     },
     // 删除
     async remove() {
-      try {
-        // console.log(this.listForm.id);
-        const res = await this.delete({ id: this.listForm.id });
+      if (!this.listForm._id) {
+        // 判断是不是一级
+        for (let i = 0; i < this.Deposit.children.length; i++) {
+          if (this.listForm.id == this.Deposit.children[i].id) {
+            this.Deposit.children.splice(i, 1);
+            const res = await this.update({ ...this.Deposit, id: this.id });
+            if (res.data.errcode == 0) {
+              this.open('删除成功');
+              this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: Array };
+              this.query();
+            }
+          }
+        }
+      } else {
+        // 是一级
+        const res = await this.delete({ id: this.id });
         if (res.data.errcode == 0) {
           this.open('删除成功');
-          this.query();
           this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: Array };
-        } else {
-          this.$message.error(res.data.errmsg);
+          this.query();
         }
-      } catch (err) {
-        this.$message.error(err);
       }
     },
     // 修改
     async updates() {
       if (this.listForm.name !== null && this.listForm.index !== null) {
-        if (this.listForm.id) {
+        if (this.id) {
           // 判断是不是一级
-          // console.log(this.listForm.id);
-          if (this.listForm.type == null) {
-            this.listForm.url = null;
-            this.listForm.binding = null;
+          console.log(this.id);
+          if (this.type == null) {
+            this.url = null;
+            this.binding = null;
           }
           console.log({ ...this.listForm });
-          const res = await this.update({ ...this.listForm });
+          const res = await this.update({ ...this.listForm, id: this.id });
           // console.log(res);
           if (res.data.errcode == 0) {
             this.open('修改成功');
@@ -236,7 +258,18 @@ export default {
             this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
           }
         } else {
-          this.$message.error('失败');
+          for (let i = 0; i < this.Deposit.children.length; i++) {
+            if (this.listForm.id == this.Deposit.children[i].id) {
+              this.Deposit.children[i] = this.listForm;
+              const res = await this.update({ ...this.Deposit, id: this.id });
+              if (res.data.errcode == 0) {
+                this.open('修改成功');
+                this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: Array };
+                this.query();
+                // this.$emit('Success');
+              }
+            }
+          }
         }
       } else {
         this.$message.error('请填写必填项');
@@ -245,7 +278,6 @@ export default {
   },
   props: {
     list: null,
-    total: null,
   },
   mounted() {},
 };

@@ -31,7 +31,6 @@ const actions = {
   async fetch({ commit }, paging = {}) {
     const res = await axios.post(api.navFetch, paging);
     if (res.data.errcode == 0) {
-      commit(types.NAVFETCH, res.data);
       return res;
     } else {
       return res;
@@ -41,9 +40,6 @@ const actions = {
 
 const mutations = {
   [types.NAVQUERY](state, payload) {
-    state.list = payload.data;
-  },
-  [types.NAVFETCH](state, payload) {
     state.list = payload.data;
   },
 };
