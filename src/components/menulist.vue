@@ -242,16 +242,13 @@ export default {
     // 修改
     async updates() {
       if (this.listForm.name !== null && this.listForm.index !== null) {
-        if (this.id) {
+        if (this.listForm._id) {
           // 判断是不是一级
-          console.log(this.id);
           if (this.type == null) {
             this.url = null;
             this.binding = null;
           }
-          console.log({ ...this.listForm });
           const res = await this.update({ ...this.listForm, id: this.id });
-          // console.log(res);
           if (res.data.errcode == 0) {
             this.open('修改成功');
             this.query();
@@ -264,9 +261,8 @@ export default {
               const res = await this.update({ ...this.Deposit, id: this.id });
               if (res.data.errcode == 0) {
                 this.open('修改成功');
-                this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: Array };
+                this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: []};
                 this.query();
-                // this.$emit('Success');
               }
             }
           }
