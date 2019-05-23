@@ -7,7 +7,7 @@
         添加一级菜单
       </el-button> -->
     </div>
-    <Menulist class="list" :list="list" ></Menulist>
+    <Menulist class="list" :list="list"></Menulist>
   </div>
 </template>
 
@@ -25,8 +25,7 @@ export default {
   },
   methods: {
     ...mapActions('menu', ['query']),
-    add(data) {
-    },
+    // add(data) {},
   },
   computed: {
     ...mapState({

@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       skip: 1,
-      limit: 2,
+      limit: 10,
     };
   },
   components: {

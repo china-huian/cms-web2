@@ -24,7 +24,7 @@ const actions = {
     const res = await axios.post(api.navDelete, paging);
     return res;
   },
-  async updata({ commit }, paging = {}) {
+  async update({ commit }, paging = {}) {
     const res = await axios.post(api.navUpdate, paging);
     return res;
   },
