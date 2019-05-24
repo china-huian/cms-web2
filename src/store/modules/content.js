@@ -30,7 +30,6 @@ const actions = {
     return res;
   },
   async update({ commit }, paging = {}) {
-    // console.log(paging);
     const res = await axios.post(api.contentUpdate, { ...paging });
     return res;
   },

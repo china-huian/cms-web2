@@ -47,7 +47,6 @@ export default {
       });
     },
     add() {
-      console.log(this.id);
       this.$router.push('pages/add');
     },
     success() {

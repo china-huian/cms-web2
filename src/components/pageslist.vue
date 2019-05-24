@@ -1,10 +1,10 @@
 <template>
   <div class="list">
     <el-table :data="list" style="width: 100%" height="70vh">
-      <el-table-column prop="name" label="名称" width="280"></el-table-column>
-      <el-table-column prop="time" label="发布时间" width="200"></el-table-column>
-      <el-table-column prop="state" label="状态" width="200"></el-table-column>
-      <el-table-column prop="use" label="发布人" width="200"></el-table-column>
+      <el-table-column prop="name" label="名称" width="220"></el-table-column>
+      <el-table-column prop="time" label="发布时间" width="160"></el-table-column>
+      <el-table-column prop="state" label="状态" width="160"></el-table-column>
+      <el-table-column prop="use" label="发布人" width="160"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" type="primary" @click="update(scope.row._id)">修改</el-button>
@@ -49,11 +49,6 @@ export default {
       } else {
         this.$message.error('删除失败');
       }
-    },
-  },
-  watch: {
-    data: function(val) {
-      console.log(val);
     },
   },
   filters: {

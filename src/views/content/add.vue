@@ -110,17 +110,16 @@ export default {
       this.$refs.upload.submit();
     },
     handleRemove(file, fileList) {
-      console.log(file, fileList);
+      // console.log(file, fileList);
     },
     handlePreview(file) {
-      console.log(file);
+      // console.log(file);
     },
     addtag() {
       this.datas.label.push({ label: null });
     },
     inputchange() {
       var num = Number(this.datas.index);
-      console.log(num);
       if (num !== num) {
         this.$message.error('排序必须为数字');
       }

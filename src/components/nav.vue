@@ -12,7 +12,8 @@
           <template slot="title">
             <p>{{ item.title }}</p>
           </template>
-          <el-menu-item v-for="(item, idx) in list" :key="idx" :index="String(i + '-' + idx)" @click="link(item.link)">{{ item.name }}</el-menu-item>
+          <!-- <el-menu-item v-for="(item, idx) in list" :key="idx" :index="String(i + '-' + idx)" @click="link(item.link)">{{ item.name }}</el-menu-item> -->
+          <el-menu-item v-for="(item, idx) in list" :key="idx" :index="String(i + '-' + idx)" @click="link(item)">{{ item.name }}</el-menu-item>
         </el-submenu>
       </template>
     </el-menu>
@@ -39,12 +40,12 @@ export default {
       this.$router.push(item.link);
       this.query();
     },
-    // link(item) {
-    //   this.$router.push({ path: '/content', query: { id: item._id }, name:item });
-    // },
-    link(address) {
-      this.$router.push({ name: address });
+    link(item) {
+      this.$router.push({ path: '/content', query: { id: item._id } });
     },
+    // link(address) {
+    //   this.$router.push({ name: address });
+    // },
   },
   computed: {
     ...mapState({
