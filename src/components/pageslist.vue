@@ -2,14 +2,6 @@
   <div class="list">
     <el-table :data="list" style="width: 100%" height="70vh">
       <el-table-column prop="name" label="名称" width="280"></el-table-column>
-<<<<<<< HEAD
-=======
-      <!-- <el-table-column prop="content" label="内容" width="200">
-        <template slot-scope="scope">
-          <p>{{ scope.row.content | content }}</p>
-        </template>
-      </el-table-column> -->
->>>>>>> Riley
       <el-table-column prop="time" label="发布时间" width="200"></el-table-column>
       <el-table-column prop="state" label="状态" width="200"></el-table-column>
       <el-table-column prop="use" label="发布人" width="200"></el-table-column>
@@ -27,22 +19,15 @@
 import { mapActions } from 'vuex';
 export default {
   data() {
-<<<<<<< HEAD
-    return {};
-=======
     return {
       skip: 1,
     };
->>>>>>> Riley
   },
   props: {
     list: null,
     data: null,
     id: null,
-<<<<<<< HEAD
-=======
     limit: null,
->>>>>>> Riley
   },
   methods: {
     ...mapActions('page', ['delete']),

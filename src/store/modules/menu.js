@@ -4,16 +4,11 @@ import api from './api';
 
 const state = {
   list: null,
-<<<<<<< HEAD
-=======
-  total: null,
->>>>>>> Riley
 };
 
 const actions = {
   async query({ commit }, paging = {}) {
     const res = await axios.post(api.navQuery, paging);
-<<<<<<< HEAD
     if (res.data.errcode == 0) {
       commit(types.NAVQUERY, res.data);
       return res;
@@ -36,10 +31,6 @@ const actions = {
   async fetch({ commit }, paging = {}) {
     const res = await axios.post(api.navFetch, paging);
     if (res.data.errcode == 0) {
-=======
-    if (res.data.error == 0) {
-      commit(types.MENUQUERY, res.data);
->>>>>>> Riley
       return res;
     } else {
       return res;
@@ -48,14 +39,8 @@ const actions = {
 };
 
 const mutations = {
-<<<<<<< HEAD
   [types.NAVQUERY](state, payload) {
     state.list = payload.data;
-=======
-  [types.MENUQUERY](state, payload) {
-    state.list = payload.data;
-    state.total = payload.total;
->>>>>>> Riley
   },
 };
 

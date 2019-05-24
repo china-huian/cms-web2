@@ -8,10 +8,7 @@ const state = {
 };
 
 const actions = {
-<<<<<<< HEAD
-=======
   // 异步函数query，第一个参数暂理解为固定写法，commit用于向mutation传送数据，第二个参数为从页面向actions传的值
->>>>>>> Riley
   async query({ commit }, paging = {}) {
     const res = await axios.post(api.pageQuery, paging);
     if (res.data.errcode == 0) {
