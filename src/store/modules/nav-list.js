@@ -22,14 +22,6 @@ export default [
         name: '新闻栏目',
         link: '/content/news',
       },
-      {
-        name: '新闻资讯',
-        link: '/content/information',
-      },
-      {
-        name: '焦点新闻',
-        link: '/content/focus',
-      },
     ],
   },
   {

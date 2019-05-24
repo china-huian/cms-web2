@@ -24,12 +24,15 @@
 import { mapActions } from 'vuex';
 export default {
   data() {
-    return {};
+    return {
+      skip: 1,
+    };
   },
   props: {
     list: null,
     data: null,
     id: null,
+    limit: null,
   },
   methods: {
     ...mapActions('page', ['delete']),

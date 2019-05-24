@@ -1,31 +1,102 @@
 <template>
   <div class="box addbox block">
     <div class="title fj">
-      <span class="fd1">栏目添加</span>
+      <span v-if="!id" class="fd1">栏目添加</span>
+      <span v-else class="fd1">栏目修改</span>
     </div>
     <div class="inputbox fj block">
       <div class="fd1">
         <el-input class="inputname block" v-model="name" placeholder="请输入名称"></el-input>
         <el-input class="inputname block" v-model="calalog" placeholder="请输入目录"></el-input>
-        <el-button class="fd1 addbtn" type="primary" @click="upadd"> <i class="el-icon-circle-check el-icon--left"></i>确认添加 </el-button>
-      </div>
-      <div class="fd2">
-        <el-select v-model="type" placeholder="请选择模板">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-        </el-select>
+        <el-button v-if="!id" class="fd1 addbtn" type="primary" @click="upadd"> <i class="el-icon-circle-check el-icon--left"></i>确认添加 </el-button>
+        <el-button v-else class="fd1 addbtn" type="primary" @click="updates"> <i class="el-icon-circle-check el-icon--left"></i>确认修改 </el-button>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapActions, mapState } from 'vuex';
 export default {
   data() {
     return {
       name: '',
       calalog: '',
-      type: '',
-      options: [{ label: '模板1 ', value: '0' }, { label: '模板2', value: '1' }],
+      id: '',
     };
+  },
+  async mounted() {
+    // 更改初始化
+    this.id = this.$route.query.id;
+    if (this.id) {
+      const resfetch = await this.fetch({ id: this.id });
+      if (resfetch.data.errcode == 0) {
+        // Array.from(resfetch.data.data)
+        this.name = resfetch.data.data.name;
+        // console.log(resfetch.data);
+        // 记得是两层 console.log(resfetch);查看数据结构
+      }
+    }
+  },
+  methods: {
+    ...mapActions('column', ['query', 'add', 'update', 'fetch']),
+    open(msg) {
+      // 成功弹出
+      this.$message({
+        message: msg,
+        type: 'success',
+      });
+    },
+    async upadd() {
+      // 添加
+      if (this.name !== '') {
+        try {
+          const res = await this.add({
+            name: this.name,
+            // catalog: this.catalog,
+          });
+          if (res.data.errcode == 0) {
+            this.open('添加成功');
+            this.$router.push('/column');
+          } else {
+            this.$message.error(res.data.errmsg);
+            // 错误弹出内容
+          }
+        } catch (err) {
+          console.log(err);
+          this.$message.error(err);
+        }
+      } else {
+        this.$message.error('选项不能为空');
+        // 错误弹出
+      }
+    },
+    async updates() {
+      // 修改
+      // console.log(this.id);
+      if (this.name !== '' && this.id !== '') {
+        try {
+          const res = await this.update({
+            name: this.name,
+            id: this.id,
+          });
+          if (res.data.errcode == 0) {
+            this.open('修改成功');
+            // console.log(res.data);
+            this.$router.push('/column');
+          } else {
+            this.$message.error(res.data.errmsg);
+          }
+        } catch (err) {
+          console.log(err);
+          this.$message.error(err);
+        }
+      } else {
+        this.$message.error('选项不可以为空');
+      }
+    },
+  },
+  computed: {
+    ...mapState('column', ['list']),
   },
 };
 </script>

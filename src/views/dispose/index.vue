@@ -8,12 +8,10 @@
       </el-button>
     </div>
     <Columnlist class="list" :data="pageslist"> </Columnlist>
-    <Pagination />
   </div>
 </template>
 
 <script>
-import Pagination from '@/components/pagination';
 import Columnlist from '@/components/columnlist';
 export default {
   data() {
@@ -22,7 +20,6 @@ export default {
     };
   },
   components: {
-    Pagination,
     Columnlist,
   },
   methods: {

@@ -1,12 +1,12 @@
 <template>
   <div class="box addbox block">
     <div class="title fj">
-      <span class="fd1" v-if="!this.datas.binding">内容添加</span>
+      <span class="fd1" v-if="!id">内容添加</span>
       <span class="fd1" v-else>内容修改</span>
     </div>
     <div class="input">
       <el-input class="inputname block" v-model="datas.name" placeholder="请输入名称"></el-input>
-      <el-input class="inputname block" v-model="datas.index" placeholder="请输入排序"></el-input>
+      <el-input class="inputname block" v-model="datas.index" placeholder="请输入排序" @change="inputchange"></el-input>
     </div>
     <el-select class="inputname block sel" v-model="datas.state" placeholder="请选择状态">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
@@ -22,8 +22,7 @@
         :on-remove="handleRemove"
         :file-list="datas.annex"
         :auto-upload="true"
-        :on-success="uploadSuc"
-        ><!--:before-upload="beforeUp"-->
+      >
         <el-button>选取文件</el-button>
       </el-upload>
     </div>
@@ -118,6 +117,13 @@ export default {
     },
     addtag() {
       this.datas.label.push({ label: null });
+    },
+    inputchange() {
+      var num = Number(this.datas.index);
+      console.log(num);
+      if (num !== num) {
+        this.$message.error('排序必须为数字');
+      }
     },
   },
 };

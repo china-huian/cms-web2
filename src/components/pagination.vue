@@ -1,14 +1,32 @@
 <template>
   <div class="block">
-    <el-pagination :current-page.sync="currentPage" :page-size="100" layout="prev, pager, next, jumper" :total="1000"></el-pagination>
+    <el-pagination
+      @current-change="handleCurrentChange"
+      :current-page.sync="skip"
+      :page-size="limit"
+      layout="prev, pager, next, total"
+      :total="total"
+    ></el-pagination>
   </div>
 </template>
+
 <script>
 export default {
+  name: 'pagination',
   data() {
     return {
-      currentPage: 5,
+      skip: 1,
     };
+  },
+  methods: {
+    handleCurrentChange(val) {
+      this.skip = val;
+      this.$emit('pagination', { skip: this.skip, limit: this.limit });
+    },
+  },
+  props: {
+    total: null,
+    limit: null,
   },
 };
 </script>
