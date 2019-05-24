@@ -20,7 +20,7 @@ export default {
   // 内容接口
   contentQuery: 'admin/content/query',
   contentAdd: 'admin/content/add',
-  contentUpdata: 'admin/content/updata',
+  contentUpdate: 'admin/content/update',
   contentDelete: 'admin/content/delete',
   contentFetch: 'admin/content/fetch',
   // 配置接口

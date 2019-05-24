@@ -4,64 +4,54 @@ import api from './api';
 
 const state = {
   list: null,
-<<<<<<< HEAD
-=======
   total: null,
->>>>>>> Riley
 };
 
 const actions = {
   async query({ commit }, paging = {}) {
-    const res = await axios.post(api.navQuery, paging);
-<<<<<<< HEAD
+    const res = await axios.post(api.infoQuery, paging);
     if (res.data.errcode == 0) {
-      commit(types.NAVQUERY, res.data);
+      commit(types.INFOQUERY, res.data);
       return res;
     } else {
       return res;
     }
   },
   async add({ commit }, paging = {}) {
-    const res = await axios.post(api.navAdd, paging);
+    const res = await axios.post(api.infoAdd, paging);
     return res;
   },
   async delete({ commit }, paging = {}) {
-    const res = await axios.post(api.navDelete, paging);
+    const res = await axios.post(api.infoDelete, paging);
     return res;
   },
   async update({ commit }, paging = {}) {
-    const res = await axios.post(api.navUpdate, paging);
+    const res = await axios.post(api.infoUpdata, paging);
     return res;
   },
   async fetch({ commit }, paging = {}) {
-    const res = await axios.post(api.navFetch, paging);
+    const res = await axios.post(api.infoFetch, paging);
     if (res.data.errcode == 0) {
-=======
-    if (res.data.error == 0) {
-      commit(types.MENUQUERY, res.data);
->>>>>>> Riley
+      commit(types.INFOFETCH, res.data);
       return res;
     } else {
       return res;
     }
   },
 };
-
 const mutations = {
-<<<<<<< HEAD
-  [types.NAVQUERY](state, payload) {
-    state.list = payload.data;
-=======
-  [types.MENUQUERY](state, payload) {
+  [types.INFOQUERY](state, payload) {
     state.list = payload.data;
     state.total = payload.total;
->>>>>>> Riley
+  },
+  [types.INFOFETCH](state, payload) {
+    state.list = payload.data;
+    state.total = payload.total;
   },
 };
-
 export default {
   namespaced: true,
+  state,
   mutations,
   actions,
-  state,
 };

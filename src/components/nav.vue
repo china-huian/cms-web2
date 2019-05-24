@@ -10,9 +10,14 @@
         </el-menu-item>
         <el-submenu :key="i" :index="String(i + 1)" v-if="item.arr.length > 0">
           <template slot="title">
-            <p @click="btn(item)">{{ item.title }}</p>
+            <p>{{ item.title }}</p>
           </template>
+<<<<<<< HEAD
           <el-menu-item v-for="(item, idx) in list" :key="idx" :index="String(i + '-' + idx)" @click="link(item.link)">{{ item.name }}</el-menu-item>
+=======
+          <!-- <el-menu-item v-for="(item, idx) in item.arr" :key="idx" :index="String(i + '-' + idx)" @click="btn(item)">{{ item.name }} </el-menu-item> -->
+          <el-menu-item v-for="(item, idx) in list" :key="idx" :index="String(i + '-' + idx)" @click="link(item)">{{ item.name }}</el-menu-item>
+>>>>>>> Riley
         </el-submenu>
       </template>
     </el-menu>
@@ -38,10 +43,21 @@ export default {
     btn(item) {
       this.$router.push(item.link);
       this.query();
+<<<<<<< HEAD
+=======
+    },
+    link(item) {
+      this.$router.push({ path: '/content', query: { id: item._id } });
+>>>>>>> Riley
     },
     link(address) {
       this.$router.push({ name: address });
     },
+  },
+  computed: {
+    ...mapState({
+      list: state => state.nav.list,
+    }),
   },
   computed: {
     ...mapState({

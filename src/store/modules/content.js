@@ -8,46 +8,44 @@ const state = {
 };
 
 const actions = {
-<<<<<<< HEAD
-=======
-  // 异步函数query，第一个参数暂理解为固定写法，commit用于向mutation传送数据，第二个参数为从页面向actions传的值
->>>>>>> Riley
   async query({ commit }, paging = {}) {
-    const res = await axios.post(api.pageQuery, paging);
+    const res = await axios.post(api.contentQuery, paging);
     if (res.data.errcode == 0) {
-      commit(types.PAGEQUERY, res.data);
+      commit(types.CONTENTQUERY, res.data);
       return res;
     } else {
       return res;
     }
   },
   async add({ commit }, paging = {}) {
-    const res = await axios.post(api.pageAdd, { ...paging });
+    const res = await axios.post(api.contentAdd, { ...paging });
     return res;
   },
   async fetch({ commit }, paging = {}) {
-    const res = await axios.post(api.pageFetch, { ...paging });
+    const res = await axios.post(api.contentFetch, { ...paging });
     return res;
   },
   async delete({ commit }, paging = {}) {
-    const res = await axios.post(api.pageDelete, { ...paging });
+    const res = await axios.post(api.contentDelete, { ...paging });
     return res;
   },
   async update({ commit }, paging = {}) {
-    const res = await axios.post(api.pageUpdate, { ...paging });
+    // console.log(paging);
+    const res = await axios.post(api.contentUpdate, { ...paging });
     return res;
   },
 };
 
 const mutations = {
-  [types.PAGEQUERY](state, payload) {
+  [types.CONTENTQUERY](state, payload) {
     state.list = payload.data;
     state.total = payload.total;
   },
 };
+
 export default {
   namespaced: true,
-  state,
   actions,
   mutations,
+  state,
 };

@@ -1,8 +1,15 @@
 <template>
   <div class="  ">
     <el-table :data="list" style="width: 100%" height="70vh">
+<<<<<<< HEAD
       <el-table-column prop="name" label="名称" width="350"></el-table-column>
       <el-table-column prop="time" label="时间" width="350" v-if="this.$route.name !== 'dispose'"></el-table-column>
+=======
+      <!-- <el-table :data="list.slice((skip-1)*page-size, skip*page-size)" style="width: 100%" height="70vh"> -->
+      <el-table-column prop="name" label="名称" width="350"></el-table-column>
+      <!-- <el-table-column prop="catalog" label="目录" width="250"></el-table-column> -->
+      <el-table-column prop="time" label="时间" width="350"></el-table-column>
+>>>>>>> Riley
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button class="fd1" size="mini" type="primary" @click="update(scope.row._id)">修改</el-button>
@@ -32,10 +39,18 @@ export default {
     update(id) {
       //更改跳转
       this.$router.push({ path: this.$route.name + '/add', query: { id } });
+<<<<<<< HEAD
     },
     async remove(id) {
       // 删除
       
+=======
+      console.log(this.$route);
+    },
+    async remove(id) {
+      // console.log(id);
+      // 删除
+>>>>>>> Riley
       try {
         const res = await this.delete({ id: id });
         if (res.data.errcode == 0) {
@@ -45,6 +60,10 @@ export default {
           this.$message.error(res.data.errmsg);
         }
       } catch (err) {
+<<<<<<< HEAD
+=======
+        // console.log(err);
+>>>>>>> Riley
         this.$message.error(err);
       }
     },

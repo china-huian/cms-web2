@@ -1,18 +1,15 @@
 <template>
   <div class="list">
     <el-table :data="list" style="width: 100%" height="70vh">
-      <el-table-column prop="name" label="名称" width="280"></el-table-column>
-<<<<<<< HEAD
-=======
-      <!-- <el-table-column prop="content" label="内容" width="200">
+      <el-table-column prop="name" label="标题" width="350">
         <template slot-scope="scope">
-          <p>{{ scope.row.content | content }}</p>
+          <p class="fd1" @click="link">{{ scope.row.name }}</p>
         </template>
-      </el-table-column> -->
->>>>>>> Riley
-      <el-table-column prop="time" label="发布时间" width="200"></el-table-column>
-      <el-table-column prop="state" label="状态" width="200"></el-table-column>
-      <el-table-column prop="use" label="发布人" width="200"></el-table-column>
+      </el-table-column>
+      <el-table-column prop="count" label="阅读量" width="180"></el-table-column>
+      <el-table-column prop="publisher" label="发布人" width="180"></el-table-column>
+      <el-table-column prop="state" label="状态" width="180"></el-table-column>
+      <el-table-column prop="date" label="发布时间"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" type="primary" @click="update(scope.row._id)">修改</el-button>
@@ -27,25 +24,17 @@
 import { mapActions } from 'vuex';
 export default {
   data() {
-<<<<<<< HEAD
     return {};
-=======
-    return {
-      skip: 1,
-    };
->>>>>>> Riley
   },
   props: {
     list: null,
-    data: null,
     id: null,
-<<<<<<< HEAD
-=======
-    limit: null,
->>>>>>> Riley
   },
   methods: {
-    ...mapActions('page', ['delete']),
+    ...mapActions('content', ['delete']),
+    link() {
+      this.$router.push('./content/forthismoment');
+    },
     open(msg) {
       this.$message({
         message: msg,
@@ -53,8 +42,8 @@ export default {
       });
     },
     update(id) {
-      //更改跳转
       this.$router.push({ path: this.$route.name + '/add', query: { id } });
+      console.log(id);
     },
     async remove(id) {
       const res = await this.delete({ id: id });
@@ -69,11 +58,6 @@ export default {
   watch: {
     data: function(val) {
       console.log(val);
-    },
-  },
-  filters: {
-    content: function(val) {
-      return val;
     },
   },
 };
