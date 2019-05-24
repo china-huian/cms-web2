@@ -18,10 +18,10 @@
         class="upload-demo"
         ref="newupload"
         action="/admin/file/upload"
-        :on-preview="handlePreview"
         :on-remove="handleRemove"
         :file-list="datas.annex"
         :auto-upload="true"
+        :on-success="success"
       >
         <el-button>选取文件</el-button>
       </el-upload>
@@ -50,6 +50,8 @@ export default {
     return {
       options: [{ value: '草稿' }, { value: '发布' }],
       id: null,
+      list: [],
+      fileList: [],
       datas: {
         name: null,
         binding: null,
@@ -106,14 +108,18 @@ export default {
         this.$message.error(res.data.errmsg);
       }
     },
+    success(file) {
+      this.datas.annex.push(file.data);
+    },
     submitUpload() {
       this.$refs.upload.submit();
     },
-    handleRemove(file, fileList) {
-      // console.log(file, fileList);
-    },
-    handlePreview(file) {
-      // console.log(file);
+    handleRemove(file) {
+      for (let i = 0; i < this.datas.annex.length; i++) {
+        if (file._id == this.datas.annex[i]._id) {
+          this.datas.annex.splice(i, 1);
+        }
+      }
     },
     addtag() {
       this.datas.label.push({ label: null });
