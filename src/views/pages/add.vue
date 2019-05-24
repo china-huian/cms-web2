@@ -67,7 +67,6 @@ export default {
         this.$message.error(res.data.errmsg);
       }
     },
-
     async doadd() {
       if (this.name !== '') {
         const res = await this.add({

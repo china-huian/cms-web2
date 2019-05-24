@@ -8,7 +8,7 @@
       </el-button>
     </div>
     <Newslist class="list" :list="list" v-on:success="success"></Newslist>
-    <Pagination />
+    <Pagination :total="total" v-on:pagination="paging" :limit="limit"></Pagination>
   </div>
 </template>
 
@@ -20,6 +20,8 @@ export default {
   data() {
     return {
       id: null,
+      skip: 1,
+      limit: 10,
     };
   },
   components: {
@@ -29,7 +31,7 @@ export default {
   mounted() {
     this.id = this.$route.query.id;
     if (this.id) {
-      this.query({ skip: 1, limit: 20, binding: this.id });
+      this.query({ skip: 1, limit: 10, binding: this.id });
     }
   },
   methods: {
@@ -44,12 +46,19 @@ export default {
       this.$router.push({ path: 'content/add', query: { bindingid: this.id } });
     },
     success() {
-      this.query({ skip: 1, limit: 20, binding: this.id });
+      this.query({ skip: 1, limit: 10, binding: this.id });
+    },
+    paging({ skip, limit }) {
+      // skip 页数  limit 条数
+      this.limit = limit;
+      this.skip = skip;
+      this.query({ skip: skip, limit: limit });
     },
   },
   computed: {
     ...mapState({
       list: state => state.content.list,
+      total: state => state.content.total,
     }),
   },
   watch: {
@@ -57,7 +66,7 @@ export default {
       this.id = val.query.id;
     },
     id: function() {
-      this.query({ skip: 1, limit: 20, binding: this.id });
+      this.query({ skip: 1, limit: 10, binding: this.id });
     },
   },
 };

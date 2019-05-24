@@ -18,5 +18,6 @@ export default {
 .self {
   min-width: 1300px;
   background: #eae9e6;
+  overflow: -webkit-paged-y;
 }
 </style>
