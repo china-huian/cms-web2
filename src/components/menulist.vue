@@ -171,12 +171,17 @@ export default {
       this.id = null;
       this.children = false;
     },
+    // 添加二级菜单
     addTow() {
-      if (this.listForm._id) {
-        this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
-        this.children = true;
+      if (this.listForm.type == null && this.listForm.binding == null) {
+        if (this.listForm._id) {
+          this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
+          this.children = true;
+        } else {
+          this.$message.error('只能给一级菜单添加');
+        }
       } else {
-        this.$message.error('只能给一级菜单添加');
+        this.$message.error('一级菜单类型与绑定ID应该为空');
       }
     },
     async ChildrenAdd() {
@@ -191,6 +196,18 @@ export default {
         ...this.Deposit,
         id: this.id,
       });
+
+      // if (this.listForm.type == null && this.listForm.binding == null) {
+      //   if (this.listForm._id) {
+      //     this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
+      //     // this.children = true;
+      //   } else {
+      //     this.$message.error('只允许给一级菜单添加');
+      //   }
+      // } else {
+      //   this.$message.error('一级菜单类型与绑定ID应该为空');
+      // }
+
       if (res.data.errcode == 0) {
         this.open('添加二级菜单成功');
         this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
@@ -205,6 +222,18 @@ export default {
           return false;
         }
         const res = await this.add({ ...this.listForm });
+
+        // if (this.listForm.type == null && this.listForm.binding == null) {
+        //   if (this.listForm._id) {
+        //     this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
+        //     // this.children = true;
+        //   } else {
+        //     this.$message.error('只允许给一级菜单添加');
+        //   }
+        // } else {
+        //   this.$message.error('一级菜单类型与绑定ID应该为空');
+        // }
+
         if (res.data.errcode == 0) {
           this.open('添加成功');
           this.query();
@@ -261,7 +290,7 @@ export default {
               const res = await this.update({ ...this.Deposit, id: this.id });
               if (res.data.errcode == 0) {
                 this.open('修改成功');
-                this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: []};
+                this.listForm = { name: null, type: null, binding: null, index: null, url: null, children: [] };
                 this.query();
               }
             }
