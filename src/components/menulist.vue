@@ -26,7 +26,8 @@
             @change="typequery(listForm.type)"
             placeholder="请选择内容"
           >
-            <el-option label="空" value></el-option>
+            <!-- <el-option label="空" value=></el-option> -->
+            <el-option label="空" :value="null"></el-option>
             <el-option label="栏目" value="0"></el-option>
             <el-option label="单页" value="1"></el-option>
             <el-option label="链接" value="2"></el-option>
@@ -34,7 +35,8 @@
         </el-form-item>
         <el-form-item label="绑定id" v-if="listForm.type != '2'">
           <el-select class="fd1" v-model="listForm.binding" placeholder="选择绑定的id">
-            <el-option label="空" value=" "></el-option>
+            <el-option label="空" :value="null"></el-option>
+            <!-- <el-option label="空" ></el-option> -->
             <el-option
               v-for="(item, index) in typelist"
               :key="index"
@@ -92,7 +94,7 @@
             v-if="id && children == true"
           >
             <i class="el-icon-circle-check el-icon--left"></i>
-            创建二级
+            创建
           </el-button>
         </el-form-item>
       </el-form>
@@ -102,7 +104,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-import { constants } from 'crypto';
+// import { constants } from 'crypto';
 const { mapActions: pageActions } = createNamespacedHelpers('page');
 const { mapActions: columnActions } = createNamespacedHelpers('column');
 const { mapActions } = createNamespacedHelpers('menu');

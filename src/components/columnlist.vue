@@ -35,6 +35,7 @@ export default {
     },
     async remove(id) {
       // 删除
+      
       try {
         const res = await this.delete({ id: id });
         if (res.data.errcode == 0) {
