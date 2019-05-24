@@ -11,7 +11,7 @@ import DisposeAdd from './views/dispose/add.vue';
 
 Vue.use(router);
 
-export default new router({
+const Router = new router({
   routes: [
     {
       path: '/',
@@ -61,12 +61,14 @@ export default new router({
   ],
 });
 
-// let num = 0;
-// router.beforeEach((to, from, next) => {
-//   num++;
-//   if (to.path !== '/' && num == 1) {
-//     next('/');
-//   } else {
-//     next();
-//   }
-// });
+let num = 0;
+Router.beforeEach((to, from, next) => {
+  num++;
+  if (to.path !== '/' && num == 1) {
+    next('/');
+  } else {
+    next();
+  }
+});
+
+export default Router;
