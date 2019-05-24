@@ -1,7 +1,6 @@
 <template>
   <div class="list">
     <el-table :data="list" style="width: 100%" height="70vh">
-      <!-- <el-table :data="list.slice((skip-1)*page-size, skip*page-size)" style="width: 100%" height="70vh"> -->
       <el-table-column prop="name" label="名称" width="250"></el-table-column>
       <el-table-column prop="key" label="属性名" width="200" v-if="this.$route.name == 'dispose'"></el-table-column>
       <el-table-column prop="time" label="时间" width="200" v-if="this.$route.name == 'dispose'"></el-table-column>
@@ -18,7 +17,6 @@
 export default {
   data() {
     return {
-      // link: null,
     };
   },
   methods: {
@@ -28,7 +26,6 @@ export default {
     update(id) {
       //更改跳转
       this.$router.push({ path: this.$route.name + '/add', query: { id } });
-      // console.log(this.$route);
     },
   },
   props: {

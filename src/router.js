@@ -3,7 +3,6 @@ import Router from 'vue-router';
 import Column from './views/column/index.vue';
 import ColumnAdd from './views/column/add.vue';
 import Menu from './views/menu/index.vue';
-import MenuAdd from './views/menu/add.vue';
 import Dispose from './views/dispose/index.vue';
 import DisposeAdd from './views/dispose/add.vue';
 
@@ -30,11 +29,6 @@ export default new Router({
       path: '/menu',
       name: 'menu',
       component: Menu,
-    },
-    {
-      path: '/menu/add',
-      name: 'menuadd',
-      component: MenuAdd,
     },
     {
       path: '/dispose',

@@ -8,7 +8,6 @@
       </el-button>
     </div>
     <List class="list" :list="list" v-on:remove="remove" :limit="limit"></List>
-    <!-- <Columnlist class="list" :list="Array(...list)" :limit="limit" :skip="skip"></Columnlist> -->
     <Pagination :total="total" v-on:pagination="paging" :limit="limit"></Pagination>
   </div>
 </template>
@@ -47,10 +46,8 @@ export default {
     },
 
     async remove(id) {
-      // 删除
       try {
         const res = await this.delete({ id: id });
-        // console.log(res.data);
         if (res.data.errcode == 0) {
           this.open('删除成功');
           this.query({ skip: this.skip, limit: this.limit });

@@ -7,7 +7,6 @@
     <div class="inputbox fj block">
       <div class="fd1">
         <el-input class="inputname block" v-model="name" placeholder="请输入名称"></el-input>
-        <el-input class="inputname block" v-model="calalog" placeholder="请输入目录"></el-input>
         <el-button v-if="!id" class="fd1 addbtn" type="primary" @click="upadd"> <i class="el-icon-circle-check el-icon--left"></i>确认添加 </el-button>
         <el-button v-else class="fd1 addbtn" type="primary" @click="updates"> <i class="el-icon-circle-check el-icon--left"></i>确认修改 </el-button>
       </div>
@@ -30,10 +29,8 @@ export default {
     if (this.id) {
       const resfetch = await this.fetch({ id: this.id });
       if (resfetch.data.errcode == 0) {
-        // Array.from(resfetch.data.data)
+        // Array.from(resfetch.data.data) 这种方式不可以
         this.name = resfetch.data.data.name;
-        // console.log(resfetch.data);
-        // 记得是两层 console.log(resfetch);查看数据结构
       }
     }
   },
@@ -52,7 +49,6 @@ export default {
         try {
           const res = await this.add({
             name: this.name,
-            // catalog: this.catalog,
           });
           if (res.data.errcode == 0) {
             this.open('添加成功');
@@ -72,7 +68,6 @@ export default {
     },
     async updates() {
       // 修改
-      // console.log(this.id);
       if (this.name !== '' && this.id !== '') {
         try {
           const res = await this.update({
@@ -81,13 +76,11 @@ export default {
           });
           if (res.data.errcode == 0) {
             this.open('修改成功');
-            // console.log(res.data);
             this.$router.push('/column');
           } else {
             this.$message.error(res.data.errmsg);
           }
         } catch (err) {
-          console.log(err);
           this.$message.error(err);
         }
       } else {

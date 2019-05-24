@@ -12,7 +12,6 @@
           <template slot="title">
             <p @click="btn(item)">{{ item.title }}</p>
           </template>
-          <!-- <el-menu-item v-for="(item, idx) in item.arr" :key="idx" :index="String(i + '-' + idx)" @click="btn(item)">{{ item.name }} </el-menu-item> -->
           <el-menu-item v-for="(item, idx) in list" :key="idx" :index="String(i + '-' + idx)" @click="link(item.link)">{{ item.name }}</el-menu-item>
         </el-submenu>
       </template>

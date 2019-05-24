@@ -8,7 +8,6 @@
       <div class="fd1">
         <el-input class="inputname block" v-model="name" placeholder="请输入名称"></el-input>
         <el-input class="inputname block" v-model="key" placeholder="请输入属性名"></el-input>
-        <!-- <el-input class="inputname block" v-model="name" placeholder="请输入具体内容" style="width :100%"></el-input> -->
         <el-input
           type="textarea"
           class="inputname block"
@@ -40,12 +39,9 @@ export default {
     if (this.id) {
       const resfetch = await this.fetch({ id: this.id });
       if (resfetch.data.errcode == 0) {
-        // Array.from(resfetch.data.data)
         this.name = resfetch.data.data.name;
         this.value = resfetch.data.data.value;
         this.key = resfetch.data.data.key;
-        // console.log(resfetch.data);
-        // 记得是两层 console.log(resfetch);查看数据结构
       }
     }
   },
