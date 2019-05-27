@@ -8,6 +8,7 @@ import Content from './views/content/index.vue';
 import ContentAdd from './views/content/add.vue';
 import Dispose from './views/dispose/index.vue';
 import DisposeAdd from './views/dispose/add.vue';
+import Menu from './views/menu/index.vue';
 
 Vue.use(router);
 
@@ -37,6 +38,11 @@ const Router = new router({
       path: '/pages/add',
       name: 'pages-add',
       component: PagesAdd,
+    },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: Menu,
     },
     {
       path: '/content',
